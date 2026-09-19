@@ -4,3 +4,4 @@ runtime/
 vendor/*
 !vendor/README.md
 evidence/tests-tmp/
+docker-evidence/

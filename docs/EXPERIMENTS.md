@@ -1,5 +1,7 @@
 # 장애 재현과 증거 해석
 
+이 문서는 Linux·WSL에서 직접 실행하는 방법과 기존 제출 실험을 설명한다. Windows·macOS를 포함한 Docker 실습은 [튜토리얼](../TUTORIAL.md)을 따른다. Docker 안에서는 아래의 `unshare` 접두사를 사용하지 않는다.
+
 ## 실행 환경과 포트
 
 Linux 일반 계정, Python 3.9 이상, Bash, procps(`ps`, `top`), iproute2(`ss`)가 필요하다. 필수 범위는 `MEMORY_LIMIT=50..512`, `CPU_MAX_OCCUPY=10..100`, `MULTI_THREAD_ENABLE=true/false`다. `yes/no`, `1/0`도 정규화해서 전달한다. 포트는 명세대로 15034로 고정한다.

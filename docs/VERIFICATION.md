@@ -2,6 +2,8 @@
 
 2026-09-18 실제 제공 바이너리의 비교 실행 및 수집기 검증 완료.
 
+이 문서는 당시 WSL 제출 증거의 검증 기록이다. Docker 구성 추가 후의 테스트와 실제 컨테이너 실험은 [Docker 검증 기록](DOCKER-VERIFICATION.md)을 참고한다.
+
 ## 실제 앱: 검사 50개 통과
 
 [실행 결과 원문](../evidence/verification.txt)은 `python3 scripts/verify-evidence.py`로 확인한다.

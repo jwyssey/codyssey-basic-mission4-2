@@ -1,0 +1,9 @@
+# Windows checkouts must retain Linux-compatible script line endings.
+*.sh text eol=lf
+*.py text eol=lf
+Dockerfile text eol=lf
+*.yaml text eol=lf
+*.md text eol=lf
+# Preserve captured evidence byte-for-byte, including CSV CRLF and logs.
+evidence/** -text
+submission/** -text

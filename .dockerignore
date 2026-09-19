@@ -1,0 +1,15 @@
+# Explicit allowlist: no supplied binaries, previous evidence, keys, or Git data.
+**
+!Dockerfile
+!bin/
+!bin/**
+!lib/
+!lib/**
+!scripts/
+!scripts/**
+!tests/
+!tests/**
+!docker/
+!docker/**
+**/__pycache__/**
+**/*.pyc

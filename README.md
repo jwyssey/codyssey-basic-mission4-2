@@ -2,6 +2,31 @@
 
 AI/SW Basic · 미션 4 Linux와 OS · 과제 2
 
+## Docker로 실습 시작하기
+
+Windows·macOS·Linux에서 따라 할 수 있는 [단계별 튜토리얼](TUTORIAL.md)을 먼저 읽는다. Docker Desktop 또는 Docker Engine + Compose를 준비하고, 교육기관 ZIP을 `vendor/agent-app-leak.zip`으로 복사한다. 저장소 루트에서 실행한다.
+
+```text
+docker compose build lab
+docker compose run --rm lab doctor
+docker compose run --rm lab test
+docker compose run --rm lab run oom-before
+docker compose run --rm lab show oom-before
+```
+
+전체 비교는 `docker compose run --rm lab suite`로 실행한다. 케이스당 최대 90초, CPU 관측은 0.1초, 나머지는 0.5초 간격이다. 컨테이너는 UID 1000, 외부 네트워크 차단, 메모리 1.5GiB·스왑 0으로 실행한다. CPU 쿼터는 별도로 걸지 않는다. Intel/AMD와 ARM64에 맞는 제공 바이너리를 자동 선택하며 ZIP·바이너리를 이미지에 포함하지 않는다. 추가 `unshare`나 호스트 포트 공개는 필요 없다.
+
+결과는 Docker 볼륨에 보존하고 다음 명령으로 내보낸다.
+
+```text
+docker compose create lab
+docker compose cp lab:/data/. ./docker-evidence
+```
+
+새 실험의 설정·로그·CSV와 cgroup OOM 증가량을 확인한다. [Docker 검증 기록](docs/DOCKER-VERIFICATION.md)에 실제 테스트 범위를 적었다. 아래 보고서는 **2026-09-18 WSL 실측 원본**이며, Docker 실행 결과는 별도로 비교한다. 기존 제출 PDF·ZIP도 당시 자료로 유지한다.
+
+---
+
 **2026-09-18 교육기관 제공 앱으로 장애 3종과 설정 변경 전후 총 6회 비교를 완료했다.** 이 README에 발생 현상, 실측 로그·그래프, 원인 분석, 조치 및 검증 결과를 모았다. 스케줄링 보너스 분석과 재현 방법도 아래에서 확인할 수 있다.
 
 수집 도구 테스트 **11개**, 실측 증거 검사 **50개**가 통과했다. 개별 Issue로 옮겨 쓸 보고서는 [reports/](reports/), 원문 증거는 [evidence/](evidence/)에 있다.

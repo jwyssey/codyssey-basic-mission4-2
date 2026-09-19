@@ -1,0 +1,35 @@
+name: codyssey-mission4-2
+
+services:
+  lab:
+    build:
+      context: .
+    image: codyssey-mission4-2:local
+    init: true
+    user: "1000:1000"
+    network_mode: none
+    read_only: true
+    cap_drop: [ALL]
+    security_opt:
+      - no-new-privileges:true
+    # Keep ample space above the application's 512 MB setting.
+    mem_limit: 1536m
+    memswap_limit: 1536m
+    pids_limit: 256
+    stop_grace_period: 30s
+    tmpfs:
+      # The packaged Python app extracts executable libraries here.
+      - /tmp:rw,exec,nosuid,size=128m,mode=1777
+    volumes:
+      - type: bind
+        source: ./vendor
+        target: /input
+        read_only: true
+        bind:
+          create_host_path: false
+      - type: volume
+        source: lab-evidence
+        target: /data
+
+volumes:
+  lab-evidence:

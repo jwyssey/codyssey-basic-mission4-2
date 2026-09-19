@@ -18,6 +18,7 @@ import time
 import tty
 
 from monitor import positive, processes, utc_now
+from runtime_context import cgroup_snapshot, oom_kill_delta, runtime_context
 
 ROOT = Path(__file__).resolve().parents[1]
 PRESETS = {
@@ -172,7 +173,8 @@ def run_case(args, case):
                 "interval_s": args.interval, "snapshot_interval_s": args.snapshot_interval,
                 "namespaces": {name: os.readlink(f"/proc/self/ns/{name}") for name in ("user", "net")},
                 "stdout_mode": "pty_line_buffered",
-                "evidence_source": "test_fixture" if args.fixture else "provided_app"}
+                "evidence_source": "test_fixture" if args.fixture else "provided_app",
+                "runtime": runtime_context()}
     dump(directory / "metadata.json", metadata)
     print(f"[RUN] {case}: {directory}", flush=True)
     started = time.monotonic()
@@ -271,10 +273,13 @@ def run_case(args, case):
                         monitor.wait()
             for sig, handler in old_handlers.items():
                 signal.signal(sig, handler)
+    cgroup_after = cgroup_snapshot()
     result = {"ended_at": utc_now(), "reason": reason, "observed_s": round(observed, 3),
               "alive_before_cleanup": alive, "launcher_returncode": exit_code,
               "monitor_returncode": monitor.returncode if monitor else None,
-              "runner_events": events, "error": error}
+              "runner_events": events, "error": error,
+              "cgroup_after": cgroup_after,
+              "cgroup_oom_kill_delta": oom_kill_delta(metadata["runtime"]["cgroup"], cgroup_after)}
     dump(directory / "result.json", result)
     if (directory / "metrics.csv").is_file():
         summarize(directory)
