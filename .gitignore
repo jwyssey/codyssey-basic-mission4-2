@@ -3,5 +3,6 @@ __pycache__/
 runtime/
 vendor/*
 !vendor/README.md
+!vendor/agent-app-leak.zip
 evidence/tests-tmp/
 docker-evidence/

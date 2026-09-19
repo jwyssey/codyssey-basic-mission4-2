@@ -42,7 +42,7 @@ Windows PowerShell, macOS 터미널, Linux에서 아래 `docker compose` 명령�
 - `USER 1000:1000`으로 root 실행을 피한다. 이 설정 자체가 Docker 사용자 네임스페이스를 활성화한다는 뜻은 아니다.
 - `network_mode: none`으로 네트워크를 격리한다. 앱은 컨테이너 내부에서 15034 포트를 사용한다. 호스트로 포트를 공개하지 않는다.
 - 메모리는 컨테이너 전체에 1.5GiB, 스왑은 0으로 제한한다. 앱의 `MEMORY_LIMIT`와 별개다. CPU 쿼터는 별도로 걸지 않는다.
-- ZIP과 실행 파일은 Git·이미지에서 제외한다. 다른 PC에서도 교육기관에서 받은 ZIP을 별도로 준비한다.
+- 원본 ZIP은 저장소의 `vendor/agent-app-leak.zip`에 포함한다. Docker는 이 ZIP을 실행 시 읽기 전용으로 연결한다. ZIP과 실행 파일은 이미지에 포함하지 않으며, 추출한 실행 파일은 Git에서 제외한다.
 
 Docker 안에서 기존 `unshare --user --map-current-user --net` 명령을 다시 실행할 필요는 없다. 필요한 격리는 Compose가 구성한다.
 
@@ -68,9 +68,9 @@ git clone https://github.com/jwyssey/codyssey-basic-mission4-2.git
 cd codyssey-basic-mission4-2
 ```
 
-이미 저장소가 있다면 `Dockerfile`과 `compose.yaml`이 있는 디렉터리로 이동한다. 현재 과제 작업 폴더에서는 `code/`가 그 위치다.
+이미 저장소가 있다면 `Dockerfile`과 `compose.yaml`이 있는 디렉터리로 이동하고 `git pull`로 최신 파일을 받는다. 현재 과제 작업 폴더에서는 `code/`가 그 위치다.
 
-탐색기나 Finder로 교육기관 제공 `agent-app-leak.zip`을 `vendor/agent-app-leak.zip` 위치에 복사한다. 압축을 직접 풀거나 이름이 비슷한 과제 1 앱으로 대체하지 않는다.
+교육기관 제공 원본 ZIP이 `vendor/agent-app-leak.zip`에 포함되어 있으므로 별도 다운로드나 복사 없이 다음 단계로 진행한다. Docker가 실행 파일을 자동 추출한다. 이름이 비슷한 과제 1 앱으로 대체하지 않는다.
 
 ```text
 codyssey-basic-mission4-2/
@@ -339,7 +339,7 @@ OOM 한도 상향, CPU 설정 조정, 문제 동시 경로 비활성화는 관�
 | 증상 | 확인·조치 |
 | --- | --- |
 | Docker Server에 연결하지 못함 | Docker Desktop 실행, Linux containers 선택, WSL Integration 확인 |
-| ZIP이 없다고 나옴 | 현재 저장소의 `vendor/agent-app-leak.zip` 위치와 파일명 확인 |
+| ZIP이 없다고 나옴 | `git pull`로 최신 저장소를 받고 `vendor/agent-app-leak.zip` 위치와 파일명 확인 |
 | ELF 또는 아키텍처 오류 | 과제 2 원본 ZIP의 x86·arm64 파일 확인. `platform: linux/amd64`를 임의로 강제하지 않기 |
 | `/data` 권한 오류 | Compose의 named volume 및 UID 1000 유지. 임의의 호스트 폴더로 `/data`를 교체했는지 확인 |
 | READY 이전 즉시 종료 | 마지막 로그에서 부팅 실패·라이브러리·키·경로 문제 확인 |

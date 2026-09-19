@@ -4,7 +4,7 @@ AI/SW Basic · 미션 4 Linux와 OS · 과제 2
 
 ## Docker로 실습 시작하기
 
-Windows·macOS·Linux에서 따라 할 수 있는 [단계별 튜토리얼](TUTORIAL.md)을 먼저 읽는다. Docker Desktop 또는 Docker Engine + Compose를 준비하고, 교육기관 ZIP을 `vendor/agent-app-leak.zip`으로 복사한다. 저장소 루트에서 실행한다.
+Windows·macOS·Linux에서 따라 할 수 있는 [단계별 튜토리얼](TUTORIAL.md)을 먼저 읽는다. 교육기관 제공 원본 ZIP은 [vendor/agent-app-leak.zip](vendor/agent-app-leak.zip)에 포함되어 있어 저장소를 clone하면 함께 받는다. Docker Desktop 또는 Docker Engine + Compose를 준비하고 저장소 루트에서 실행한다.
 
 ```text
 docker compose build lab
@@ -399,10 +399,11 @@ After에서는 `All tasks completed`, 부하 냉각, `18:18:17.146 Memory Cache 
 
 ## 재현 방법
 
-제공 ZIP의 `agent-leak-app-x86`을 `vendor/`에 추출했다. 원본은 수정하지 않았으며 [ZIP·바이너리 SHA256](evidence/artifact.json)을 보존했다. 다른 PC에서는 아키텍처에 맞는 교육기관 제공 파일을 준비한다.
+제공 ZIP의 `agent-leak-app-x86`을 `vendor/`에 추출했다. 원본은 수정하지 않았으며 [ZIP·바이너리 SHA256](evidence/artifact.json)을 보존했다. Linux에서 직접 실행하려면 저장소에 포함된 `vendor/agent-app-leak.zip`에서 아키텍처에 맞는 파일을 추출한다. ARM64에서는 아래 파일명을 `agent-leak-app-arm64`로 바꾼다.
 
 ```bash
-# 저장소의 code 폴더에서 실행
+# 저장소 루트에서 실행
+unzip -p vendor/agent-app-leak.zip agent-leak-app-x86 > vendor/agent-leak-app-x86
 chmod u+x vendor/agent-leak-app-x86
 
 # 현재 PC처럼 기존 서비스가 15034를 쓰는 경우 독립 네트워크로 실행
