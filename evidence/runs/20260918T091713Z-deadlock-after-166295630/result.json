@@ -1,0 +1,16 @@
+{
+  "ended_at": "2026-09-18T09:18:43.795+00:00",
+  "reason": "observation_timeout",
+  "observed_s": 90.044,
+  "alive_before_cleanup": true,
+  "launcher_returncode": -15,
+  "monitor_returncode": 0,
+  "runner_events": [
+    {
+      "timestamp": "2026-09-18T09:18:43.526+00:00",
+      "actor": "runner",
+      "signal": "SIGTERM"
+    }
+  ],
+  "error": null
+}

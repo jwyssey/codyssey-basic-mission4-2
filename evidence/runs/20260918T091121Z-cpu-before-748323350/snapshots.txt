@@ -1,0 +1,970 @@
+
+=== 2026-09-18T09:11:21.809+00:00 phase=observing PGID=2445613 PIDS=2445613 ===
+
+[2026-09-18T09:11:21.809+00:00] $ ps -p 2445613 -o user,pid,ppid,pgid,etime,stat,pcpu,pmem,rss,vsz,args
+USER         PID    PPID    PGID     ELAPSED STAT %CPU %MEM   RSS    VSZ COMMAND
+kjw      2445613 2445606 2445613       00:00 Rs    0.0  0.0  1920   2900 /mnt/c/Users/jump0/Desktop/Obsidian/RawData/Codyssey/AI????????? ?????????/AI_SW_Basic/??????4_Linux??? OS/??????2_???????????? ????????? ??????????????? ????????? ??? ?????? ?????? ?????????/code/vendor/agent-leak-app-x86
+[command_exit=0]
+
+[2026-09-18T09:11:21.818+00:00] $ ps -L -p 2445613 -o pid,tid,stat,pcpu,rss,wchan:32,comm
+    PID     TID STAT %CPU   RSS WCHAN                            COMMAND
+2445613 2445613 Ds    0.0  1920 -                                agent-leak-app-
+[command_exit=0]
+
+[2026-09-18T09:11:21.850+00:00] $ top -b -H -n 1 -p 2445613
+top - 18:11:22 up 2 days, 12:29,  2 users,  load average: 0.21, 0.30, 0.27
+Threads:   1 total,   0 running,   1 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  3.3 us,  4.2 sy,  0.0 ni, 90.8 id,  0.0 wa,  0.0 hi,  1.7 si,  0.0 st 
+MiB Mem :  15529.2 total,   2132.4 free,   5096.7 used,   8543.4 buff/cache     
+MiB Swap:   4096.0 total,   4095.2 free,      0.8 used.  10432.5 avail Mem 
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+2445613 kjw       20   0    2904   2048   1920 S   0.0   0.0   0:00.05 agent-l+
+[command_exit=0]
+
+[2026-09-18T09:11:22.065+00:00] $ ss -ltnp 'sport = :15034'
+State  Recv-Q Send-Q Local Address:Port  Peer Address:PortProcess
+LISTEN 0      1            0.0.0.0:15034      0.0.0.0:*    users:(("agent-leak-app-",pid=2445628,fd=4))
+[command_exit=0]
+
+/proc/2445613/status
+Name:	agent-leak-app-
+Umask:	0077
+State:	S (sleeping)
+Tgid:	2445613
+Ngid:	0
+Pid:	2445613
+PPid:	2445606
+TracerPid:	0
+Uid:	1000	1000	1000	1000
+Gid:	1000	1000	1000	1000
+FDSize:	64
+Groups:	65534 65534 65534 65534 65534 65534 65534 1000 65534 
+NStgid:	2445613
+NSpid:	2445613
+NSpgid:	2445613
+NSsid:	2445613
+Kthread:	0
+VmPeak:	    2904 kB
+VmSize:	    2904 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	    2048 kB
+VmRSS:	    2048 kB
+RssAnon:	     128 kB
+RssFile:	    1920 kB
+RssShmem:	       0 kB
+VmData:	     248 kB
+VmStk:	     136 kB
+VmExe:	      60 kB
+VmLib:	    1832 kB
+VmPTE:	      44 kB
+VmSwap:	       0 kB
+HugetlbPages:	       0 kB
+CoreDumping:	0
+THP_enabled:	1
+untag_mask:	0xffffffffffffffff
+Threads:	1
+SigQ:	0/62077
+SigPnd:	0000000000000000
+ShdPnd:	0000000000000000
+SigBlk:	0000000000000000
+SigIgn:	0000000000000000
+SigCgt:	fffffffe7ff2feff
+CapInh:	0000000000000000
+CapPrm:	0000000000000000
+CapEff:	0000000000000000
+CapBnd:	000001ffffffffff
+CapAmb:	0000000000000000
+NoNewPrivs:	0
+Seccomp:	0
+Seccomp_filters:	0
+Speculation_Store_Bypass:	thread vulnerable
+SpeculationIndirectBranch:	conditional enabled
+Cpus_allowed:	fff
+Cpus_allowed_list:	0-11
+Mems_allowed:	00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000001
+Mems_allowed_list:	0
+voluntary_ctxt_switches:	867
+nonvoluntary_ctxt_switches:	0
+
+
+/proc/2445613/wchan
+do_wait
+
+=== 2026-09-18T09:11:27.167+00:00 phase=observing PGID=2445613 PIDS=2445613,2445628 ===
+
+[2026-09-18T09:11:27.167+00:00] $ ps -p 2445613,2445628 -o user,pid,ppid,pgid,etime,stat,pcpu,pmem,rss,vsz,args
+USER         PID    PPID    PGID     ELAPSED STAT %CPU %MEM   RSS    VSZ COMMAND
+kjw      2445613 2445606 2445613       00:05 Ss    0.9  0.0  2048   2904 /mnt/c/Users/jump0/Desktop/Obsidian/RawData/Codyssey/AI????????? ?????????/AI_SW_Basic/??????4_Linux??? OS/??????2_???????????? ????????? ??????????????? ????????? ??? ?????? ?????? ?????????/code/vendor/agent-leak-app-x86
+kjw      2445628 2445613 2445613       00:05 SN    0.5  0.1 17792  24120 /mnt/c/Users/jump0/Desktop/Obsidian/RawData/Codyssey/AI????????? ?????????/AI_SW_Basic/??????4_Linux??? OS/??????2_???????????? ????????? ??????????????? ????????? ??? ?????? ?????? ?????????/code/vendor/agent-leak-app-x86
+[command_exit=0]
+
+[2026-09-18T09:11:27.176+00:00] $ ps -L -p 2445613,2445628 -o pid,tid,stat,pcpu,rss,wchan:32,comm
+    PID     TID STAT %CPU   RSS WCHAN                            COMMAND
+2445613 2445613 Ss    0.9  2048 do_wait                          agent-leak-app-
+2445628 2445628 RN    0.7 17792 -                                agent-leak-app-
+[command_exit=0]
+
+[2026-09-18T09:11:27.192+00:00] $ top -b -H -n 1 -p 2445613,2445628
+top - 18:11:27 up 2 days, 12:29,  2 users,  load average: 0.19, 0.29, 0.27
+Threads:   2 total,   0 running,   2 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0.8 us,  0.0 sy,  0.0 ni, 99.2 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st 
+MiB Mem :  15529.2 total,   2115.6 free,   5112.3 used,   8544.5 buff/cache     
+MiB Swap:   4096.0 total,   4095.2 free,      0.8 used.  10416.9 avail Mem 
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+2445613 kjw       20   0    2904   2048   1920 S   0.0   0.0   0:00.05 agent-l+
+2445628 kjw       30  10   24120  17792   9600 S   0.0   0.1   0:00.04 agent-l+
+[command_exit=0]
+
+[2026-09-18T09:11:27.407+00:00] $ ss -ltnp 'sport = :15034'
+State  Recv-Q Send-Q Local Address:Port  Peer Address:PortProcess
+LISTEN 0      1            0.0.0.0:15034      0.0.0.0:*    users:(("agent-leak-app-",pid=2445628,fd=4))
+[command_exit=0]
+
+/proc/2445613/status
+Name:	agent-leak-app-
+Umask:	0077
+State:	S (sleeping)
+Tgid:	2445613
+Ngid:	0
+Pid:	2445613
+PPid:	2445606
+TracerPid:	0
+Uid:	1000	1000	1000	1000
+Gid:	1000	1000	1000	1000
+FDSize:	64
+Groups:	65534 65534 65534 65534 65534 65534 65534 1000 65534 
+NStgid:	2445613
+NSpid:	2445613
+NSpgid:	2445613
+NSsid:	2445613
+Kthread:	0
+VmPeak:	    2904 kB
+VmSize:	    2904 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	    2048 kB
+VmRSS:	    2048 kB
+RssAnon:	     128 kB
+RssFile:	    1920 kB
+RssShmem:	       0 kB
+VmData:	     248 kB
+VmStk:	     136 kB
+VmExe:	      60 kB
+VmLib:	    1832 kB
+VmPTE:	      44 kB
+VmSwap:	       0 kB
+HugetlbPages:	       0 kB
+CoreDumping:	0
+THP_enabled:	1
+untag_mask:	0xffffffffffffffff
+Threads:	1
+SigQ:	0/62077
+SigPnd:	0000000000000000
+ShdPnd:	0000000000000000
+SigBlk:	0000000000000000
+SigIgn:	0000000000000000
+SigCgt:	fffffffe7ff2feff
+CapInh:	0000000000000000
+CapPrm:	0000000000000000
+CapEff:	0000000000000000
+CapBnd:	000001ffffffffff
+CapAmb:	0000000000000000
+NoNewPrivs:	0
+Seccomp:	0
+Seccomp_filters:	0
+Speculation_Store_Bypass:	thread vulnerable
+SpeculationIndirectBranch:	conditional enabled
+Cpus_allowed:	fff
+Cpus_allowed_list:	0-11
+Mems_allowed:	00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000001
+Mems_allowed_list:	0
+voluntary_ctxt_switches:	867
+nonvoluntary_ctxt_switches:	0
+
+
+/proc/2445613/wchan
+do_wait
+
+/proc/2445628/status
+Name:	agent-leak-app-
+Umask:	0077
+State:	S (sleeping)
+Tgid:	2445628
+Ngid:	0
+Pid:	2445628
+PPid:	2445613
+TracerPid:	0
+Uid:	1000	1000	1000	1000
+Gid:	1000	1000	1000	1000
+FDSize:	64
+Groups:	65534 65534 65534 65534 65534 65534 65534 1000 65534 
+NStgid:	2445628
+NSpid:	2445628
+NSpgid:	2445613
+NSsid:	2445613
+Kthread:	0
+VmPeak:	   24120 kB
+VmSize:	   24120 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	   17792 kB
+VmRSS:	   17792 kB
+RssAnon:	    8192 kB
+RssFile:	    9600 kB
+RssShmem:	       0 kB
+VmData:	    9760 kB
+VmStk:	     136 kB
+VmExe:	      60 kB
+VmLib:	    7876 kB
+VmPTE:	      92 kB
+VmSwap:	       0 kB
+HugetlbPages:	       0 kB
+CoreDumping:	0
+THP_enabled:	1
+untag_mask:	0xffffffffffffffff
+Threads:	1
+SigQ:	0/62077
+SigPnd:	0000000000000000
+ShdPnd:	0000000000000000
+SigBlk:	0000000000000000
+SigIgn:	0000000001001000
+SigCgt:	0000000000000002
+CapInh:	0000000000000000
+CapPrm:	0000000000000000
+CapEff:	0000000000000000
+CapBnd:	000001ffffffffff
+CapAmb:	0000000000000000
+NoNewPrivs:	0
+Seccomp:	0
+Seccomp_filters:	0
+Speculation_Store_Bypass:	thread vulnerable
+SpeculationIndirectBranch:	conditional enabled
+Cpus_allowed:	fff
+Cpus_allowed_list:	0-11
+Mems_allowed:	00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000001
+Mems_allowed_list:	0
+voluntary_ctxt_switches:	342
+nonvoluntary_ctxt_switches:	0
+
+
+/proc/2445628/wchan
+do_select
+
+=== 2026-09-18T09:11:32.509+00:00 phase=observing PGID=2445613 PIDS=2445613,2445628 ===
+
+[2026-09-18T09:11:32.509+00:00] $ ps -p 2445613,2445628 -o user,pid,ppid,pgid,etime,stat,pcpu,pmem,rss,vsz,args
+USER         PID    PPID    PGID     ELAPSED STAT %CPU %MEM   RSS    VSZ COMMAND
+kjw      2445613 2445606 2445613       00:10 Ss    0.4  0.0  2048   2904 /mnt/c/Users/jump0/Desktop/Obsidian/RawData/Codyssey/AI????????? ?????????/AI_SW_Basic/??????4_Linux??? OS/??????2_???????????? ????????? ??????????????? ????????? ??? ?????? ?????? ?????????/code/vendor/agent-leak-app-x86
+kjw      2445628 2445613 2445613       00:10 SN    0.5  0.1 17792  24120 /mnt/c/Users/jump0/Desktop/Obsidian/RawData/Codyssey/AI????????? ?????????/AI_SW_Basic/??????4_Linux??? OS/??????2_???????????? ????????? ??????????????? ????????? ??? ?????? ?????? ?????????/code/vendor/agent-leak-app-x86
+[command_exit=0]
+
+[2026-09-18T09:11:32.513+00:00] $ ps -L -p 2445613,2445628 -o pid,tid,stat,pcpu,rss,wchan:32,comm
+    PID     TID STAT %CPU   RSS WCHAN                            COMMAND
+2445613 2445613 Ss    0.4  2048 do_wait                          agent-leak-app-
+2445628 2445628 SN    0.5 17792 do_select                        agent-leak-app-
+[command_exit=0]
+
+[2026-09-18T09:11:32.529+00:00] $ top -b -H -n 1 -p 2445613,2445628
+top - 18:11:32 up 2 days, 12:29,  2 users,  load average: 0.17, 0.29, 0.27
+Threads:   2 total,   0 running,   2 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  2.4 us,  0.8 sy,  0.0 ni, 96.7 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st 
+MiB Mem :  15529.2 total,   2116.5 free,   5111.4 used,   8544.6 buff/cache     
+MiB Swap:   4096.0 total,   4095.2 free,      0.8 used.  10417.8 avail Mem 
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+2445613 kjw       20   0    2904   2048   1920 S   0.0   0.0   0:00.05 agent-l+
+2445628 kjw       30  10   24120  17792   9600 S   0.0   0.1   0:00.06 agent-l+
+[command_exit=0]
+
+[2026-09-18T09:11:32.744+00:00] $ ss -ltnp 'sport = :15034'
+State  Recv-Q Send-Q Local Address:Port  Peer Address:PortProcess
+LISTEN 0      1            0.0.0.0:15034      0.0.0.0:*    users:(("agent-leak-app-",pid=2445628,fd=4))
+[command_exit=0]
+
+/proc/2445613/status
+Name:	agent-leak-app-
+Umask:	0077
+State:	S (sleeping)
+Tgid:	2445613
+Ngid:	0
+Pid:	2445613
+PPid:	2445606
+TracerPid:	0
+Uid:	1000	1000	1000	1000
+Gid:	1000	1000	1000	1000
+FDSize:	64
+Groups:	65534 65534 65534 65534 65534 65534 65534 1000 65534 
+NStgid:	2445613
+NSpid:	2445613
+NSpgid:	2445613
+NSsid:	2445613
+Kthread:	0
+VmPeak:	    2904 kB
+VmSize:	    2904 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	    2048 kB
+VmRSS:	    2048 kB
+RssAnon:	     128 kB
+RssFile:	    1920 kB
+RssShmem:	       0 kB
+VmData:	     248 kB
+VmStk:	     136 kB
+VmExe:	      60 kB
+VmLib:	    1832 kB
+VmPTE:	      44 kB
+VmSwap:	       0 kB
+HugetlbPages:	       0 kB
+CoreDumping:	0
+THP_enabled:	1
+untag_mask:	0xffffffffffffffff
+Threads:	1
+SigQ:	0/62077
+SigPnd:	0000000000000000
+ShdPnd:	0000000000000000
+SigBlk:	0000000000000000
+SigIgn:	0000000000000000
+SigCgt:	fffffffe7ff2feff
+CapInh:	0000000000000000
+CapPrm:	0000000000000000
+CapEff:	0000000000000000
+CapBnd:	000001ffffffffff
+CapAmb:	0000000000000000
+NoNewPrivs:	0
+Seccomp:	0
+Seccomp_filters:	0
+Speculation_Store_Bypass:	thread vulnerable
+SpeculationIndirectBranch:	conditional enabled
+Cpus_allowed:	fff
+Cpus_allowed_list:	0-11
+Mems_allowed:	00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000001
+Mems_allowed_list:	0
+voluntary_ctxt_switches:	867
+nonvoluntary_ctxt_switches:	0
+
+
+/proc/2445613/wchan
+do_wait
+
+/proc/2445628/status
+Name:	agent-leak-app-
+Umask:	0077
+State:	S (sleeping)
+Tgid:	2445628
+Ngid:	0
+Pid:	2445628
+PPid:	2445613
+TracerPid:	0
+Uid:	1000	1000	1000	1000
+Gid:	1000	1000	1000	1000
+FDSize:	64
+Groups:	65534 65534 65534 65534 65534 65534 65534 1000 65534 
+NStgid:	2445628
+NSpid:	2445628
+NSpgid:	2445613
+NSsid:	2445613
+Kthread:	0
+VmPeak:	   24120 kB
+VmSize:	   24120 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	   17792 kB
+VmRSS:	   17792 kB
+RssAnon:	    8192 kB
+RssFile:	    9600 kB
+RssShmem:	       0 kB
+VmData:	    9760 kB
+VmStk:	     136 kB
+VmExe:	      60 kB
+VmLib:	    7876 kB
+VmPTE:	      92 kB
+VmSwap:	       0 kB
+HugetlbPages:	       0 kB
+CoreDumping:	0
+THP_enabled:	1
+untag_mask:	0xffffffffffffffff
+Threads:	1
+SigQ:	0/62077
+SigPnd:	0000000000000000
+ShdPnd:	0000000000000000
+SigBlk:	0000000000000000
+SigIgn:	0000000001001000
+SigCgt:	0000000000000002
+CapInh:	0000000000000000
+CapPrm:	0000000000000000
+CapEff:	0000000000000000
+CapBnd:	000001ffffffffff
+CapAmb:	0000000000000000
+NoNewPrivs:	0
+Seccomp:	0
+Seccomp_filters:	0
+Speculation_Store_Bypass:	thread vulnerable
+SpeculationIndirectBranch:	conditional enabled
+Cpus_allowed:	fff
+Cpus_allowed_list:	0-11
+Mems_allowed:	00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000001
+Mems_allowed_list:	0
+voluntary_ctxt_switches:	349
+nonvoluntary_ctxt_switches:	0
+
+
+/proc/2445628/wchan
+do_select
+
+=== 2026-09-18T09:11:37.851+00:00 phase=observing PGID=2445613 PIDS=2445613,2445628 ===
+
+[2026-09-18T09:11:37.851+00:00] $ ps -p 2445613,2445628 -o user,pid,ppid,pgid,etime,stat,pcpu,pmem,rss,vsz,args
+USER         PID    PPID    PGID     ELAPSED STAT %CPU %MEM   RSS    VSZ COMMAND
+kjw      2445613 2445606 2445613       00:16 Ss    0.3  0.0  2048   2904 /mnt/c/Users/jump0/Desktop/Obsidian/RawData/Codyssey/AI????????? ?????????/AI_SW_Basic/??????4_Linux??? OS/??????2_???????????? ????????? ??????????????? ????????? ??? ?????? ?????? ?????????/code/vendor/agent-leak-app-x86
+kjw      2445628 2445613 2445613       00:15 SN    0.6  0.1 17792  24120 /mnt/c/Users/jump0/Desktop/Obsidian/RawData/Codyssey/AI????????? ?????????/AI_SW_Basic/??????4_Linux??? OS/??????2_???????????? ????????? ??????????????? ????????? ??? ?????? ?????? ?????????/code/vendor/agent-leak-app-x86
+[command_exit=0]
+
+[2026-09-18T09:11:37.860+00:00] $ ps -L -p 2445613,2445628 -o pid,tid,stat,pcpu,rss,wchan:32,comm
+    PID     TID STAT %CPU   RSS WCHAN                            COMMAND
+2445613 2445613 Ss    0.3  2048 do_wait                          agent-leak-app-
+2445628 2445628 SN    0.6 17792 do_select                        agent-leak-app-
+[command_exit=0]
+
+[2026-09-18T09:11:37.876+00:00] $ top -b -H -n 1 -p 2445613,2445628
+top - 18:11:38 up 2 days, 12:29,  2 users,  load average: 0.16, 0.28, 0.27
+Threads:   2 total,   0 running,   2 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0.8 us,  1.7 sy,  0.0 ni, 97.5 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st 
+MiB Mem :  15529.2 total,   2119.8 free,   5107.1 used,   8545.6 buff/cache     
+MiB Swap:   4096.0 total,   4095.2 free,      0.8 used.  10422.1 avail Mem 
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+2445613 kjw       20   0    2904   2048   1920 S   0.0   0.0   0:00.05 agent-l+
+2445628 kjw       30  10   24120  17792   9600 S   0.0   0.1   0:00.11 agent-l+
+[command_exit=0]
+
+[2026-09-18T09:11:38.092+00:00] $ ss -ltnp 'sport = :15034'
+State  Recv-Q Send-Q Local Address:Port  Peer Address:PortProcess
+LISTEN 0      1            0.0.0.0:15034      0.0.0.0:*    users:(("agent-leak-app-",pid=2445628,fd=4))
+[command_exit=0]
+
+/proc/2445613/status
+Name:	agent-leak-app-
+Umask:	0077
+State:	S (sleeping)
+Tgid:	2445613
+Ngid:	0
+Pid:	2445613
+PPid:	2445606
+TracerPid:	0
+Uid:	1000	1000	1000	1000
+Gid:	1000	1000	1000	1000
+FDSize:	64
+Groups:	65534 65534 65534 65534 65534 65534 65534 1000 65534 
+NStgid:	2445613
+NSpid:	2445613
+NSpgid:	2445613
+NSsid:	2445613
+Kthread:	0
+VmPeak:	    2904 kB
+VmSize:	    2904 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	    2048 kB
+VmRSS:	    2048 kB
+RssAnon:	     128 kB
+RssFile:	    1920 kB
+RssShmem:	       0 kB
+VmData:	     248 kB
+VmStk:	     136 kB
+VmExe:	      60 kB
+VmLib:	    1832 kB
+VmPTE:	      44 kB
+VmSwap:	       0 kB
+HugetlbPages:	       0 kB
+CoreDumping:	0
+THP_enabled:	1
+untag_mask:	0xffffffffffffffff
+Threads:	1
+SigQ:	0/62077
+SigPnd:	0000000000000000
+ShdPnd:	0000000000000000
+SigBlk:	0000000000000000
+SigIgn:	0000000000000000
+SigCgt:	fffffffe7ff2feff
+CapInh:	0000000000000000
+CapPrm:	0000000000000000
+CapEff:	0000000000000000
+CapBnd:	000001ffffffffff
+CapAmb:	0000000000000000
+NoNewPrivs:	0
+Seccomp:	0
+Seccomp_filters:	0
+Speculation_Store_Bypass:	thread vulnerable
+SpeculationIndirectBranch:	conditional enabled
+Cpus_allowed:	fff
+Cpus_allowed_list:	0-11
+Mems_allowed:	00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000001
+Mems_allowed_list:	0
+voluntary_ctxt_switches:	867
+nonvoluntary_ctxt_switches:	0
+
+
+/proc/2445613/wchan
+do_wait
+
+/proc/2445628/status
+Name:	agent-leak-app-
+Umask:	0077
+State:	S (sleeping)
+Tgid:	2445628
+Ngid:	0
+Pid:	2445628
+PPid:	2445613
+TracerPid:	0
+Uid:	1000	1000	1000	1000
+Gid:	1000	1000	1000	1000
+FDSize:	64
+Groups:	65534 65534 65534 65534 65534 65534 65534 1000 65534 
+NStgid:	2445628
+NSpid:	2445628
+NSpgid:	2445613
+NSsid:	2445613
+Kthread:	0
+VmPeak:	   24120 kB
+VmSize:	   24120 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	   17792 kB
+VmRSS:	   17792 kB
+RssAnon:	    8192 kB
+RssFile:	    9600 kB
+RssShmem:	       0 kB
+VmData:	    9760 kB
+VmStk:	     136 kB
+VmExe:	      60 kB
+VmLib:	    7876 kB
+VmPTE:	      92 kB
+VmSwap:	       0 kB
+HugetlbPages:	       0 kB
+CoreDumping:	0
+THP_enabled:	1
+untag_mask:	0xffffffffffffffff
+Threads:	1
+SigQ:	0/62077
+SigPnd:	0000000000000000
+ShdPnd:	0000000000000000
+SigBlk:	0000000000000000
+SigIgn:	0000000001001000
+SigCgt:	0000000000000002
+CapInh:	0000000000000000
+CapPrm:	0000000000000000
+CapEff:	0000000000000000
+CapBnd:	000001ffffffffff
+CapAmb:	0000000000000000
+NoNewPrivs:	0
+Seccomp:	0
+Seccomp_filters:	0
+Speculation_Store_Bypass:	thread vulnerable
+SpeculationIndirectBranch:	conditional enabled
+Cpus_allowed:	fff
+Cpus_allowed_list:	0-11
+Mems_allowed:	00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000001
+Mems_allowed_list:	0
+voluntary_ctxt_switches:	360
+nonvoluntary_ctxt_switches:	0
+
+
+/proc/2445628/wchan
+do_select
+
+=== 2026-09-18T09:11:43.199+00:00 phase=observing PGID=2445613 PIDS=2445613,2445628 ===
+
+[2026-09-18T09:11:43.199+00:00] $ ps -p 2445613,2445628 -o user,pid,ppid,pgid,etime,stat,pcpu,pmem,rss,vsz,args
+USER         PID    PPID    PGID     ELAPSED STAT %CPU %MEM   RSS    VSZ COMMAND
+kjw      2445613 2445606 2445613       00:21 Ss    0.2  0.0  2048   2904 /mnt/c/Users/jump0/Desktop/Obsidian/RawData/Codyssey/AI????????? ?????????/AI_SW_Basic/??????4_Linux??? OS/??????2_???????????? ????????? ??????????????? ????????? ??? ?????? ?????? ?????????/code/vendor/agent-leak-app-x86
+kjw      2445628 2445613 2445613       00:21 SN    0.8  0.1 17792  24120 /mnt/c/Users/jump0/Desktop/Obsidian/RawData/Codyssey/AI????????? ?????????/AI_SW_Basic/??????4_Linux??? OS/??????2_???????????? ????????? ??????????????? ????????? ??? ?????? ?????? ?????????/code/vendor/agent-leak-app-x86
+[command_exit=0]
+
+[2026-09-18T09:11:43.207+00:00] $ ps -L -p 2445613,2445628 -o pid,tid,stat,pcpu,rss,wchan:32,comm
+    PID     TID STAT %CPU   RSS WCHAN                            COMMAND
+2445613 2445613 Ss    0.2  2048 do_wait                          agent-leak-app-
+2445628 2445628 SN    0.8 17792 do_select                        agent-leak-app-
+[command_exit=0]
+
+[2026-09-18T09:11:43.224+00:00] $ top -b -H -n 1 -p 2445613,2445628
+top - 18:11:43 up 2 days, 12:30,  2 users,  load average: 0.15, 0.28, 0.27
+Threads:   2 total,   0 running,   2 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  2.4 us,  4.1 sy,  0.0 ni, 93.5 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st 
+MiB Mem :  15529.2 total,   2120.2 free,   5106.6 used,   8545.7 buff/cache     
+MiB Swap:   4096.0 total,   4095.2 free,      0.8 used.  10422.6 avail Mem 
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+2445613 kjw       20   0    2904   2048   1920 S   0.0   0.0   0:00.05 agent-l+
+2445628 kjw       30  10   24120  17792   9600 S   0.0   0.1   0:00.19 agent-l+
+[command_exit=0]
+
+[2026-09-18T09:11:43.439+00:00] $ ss -ltnp 'sport = :15034'
+State  Recv-Q Send-Q Local Address:Port  Peer Address:PortProcess
+LISTEN 0      1            0.0.0.0:15034      0.0.0.0:*    users:(("agent-leak-app-",pid=2445628,fd=4))
+[command_exit=0]
+
+/proc/2445613/status
+Name:	agent-leak-app-
+Umask:	0077
+State:	S (sleeping)
+Tgid:	2445613
+Ngid:	0
+Pid:	2445613
+PPid:	2445606
+TracerPid:	0
+Uid:	1000	1000	1000	1000
+Gid:	1000	1000	1000	1000
+FDSize:	64
+Groups:	65534 65534 65534 65534 65534 65534 65534 1000 65534 
+NStgid:	2445613
+NSpid:	2445613
+NSpgid:	2445613
+NSsid:	2445613
+Kthread:	0
+VmPeak:	    2904 kB
+VmSize:	    2904 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	    2048 kB
+VmRSS:	    2048 kB
+RssAnon:	     128 kB
+RssFile:	    1920 kB
+RssShmem:	       0 kB
+VmData:	     248 kB
+VmStk:	     136 kB
+VmExe:	      60 kB
+VmLib:	    1832 kB
+VmPTE:	      44 kB
+VmSwap:	       0 kB
+HugetlbPages:	       0 kB
+CoreDumping:	0
+THP_enabled:	1
+untag_mask:	0xffffffffffffffff
+Threads:	1
+SigQ:	0/62077
+SigPnd:	0000000000000000
+ShdPnd:	0000000000000000
+SigBlk:	0000000000000000
+SigIgn:	0000000000000000
+SigCgt:	fffffffe7ff2feff
+CapInh:	0000000000000000
+CapPrm:	0000000000000000
+CapEff:	0000000000000000
+CapBnd:	000001ffffffffff
+CapAmb:	0000000000000000
+NoNewPrivs:	0
+Seccomp:	0
+Seccomp_filters:	0
+Speculation_Store_Bypass:	thread vulnerable
+SpeculationIndirectBranch:	conditional enabled
+Cpus_allowed:	fff
+Cpus_allowed_list:	0-11
+Mems_allowed:	00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000001
+Mems_allowed_list:	0
+voluntary_ctxt_switches:	867
+nonvoluntary_ctxt_switches:	0
+
+
+/proc/2445613/wchan
+do_wait
+
+/proc/2445628/status
+Name:	agent-leak-app-
+Umask:	0077
+State:	S (sleeping)
+Tgid:	2445628
+Ngid:	0
+Pid:	2445628
+PPid:	2445613
+TracerPid:	0
+Uid:	1000	1000	1000	1000
+Gid:	1000	1000	1000	1000
+FDSize:	64
+Groups:	65534 65534 65534 65534 65534 65534 65534 1000 65534 
+NStgid:	2445628
+NSpid:	2445628
+NSpgid:	2445613
+NSsid:	2445613
+Kthread:	0
+VmPeak:	   24120 kB
+VmSize:	   24120 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	   17792 kB
+VmRSS:	   17792 kB
+RssAnon:	    8192 kB
+RssFile:	    9600 kB
+RssShmem:	       0 kB
+VmData:	    9760 kB
+VmStk:	     136 kB
+VmExe:	      60 kB
+VmLib:	    7876 kB
+VmPTE:	      92 kB
+VmSwap:	       0 kB
+HugetlbPages:	       0 kB
+CoreDumping:	0
+THP_enabled:	1
+untag_mask:	0xffffffffffffffff
+Threads:	1
+SigQ:	0/62077
+SigPnd:	0000000000000000
+ShdPnd:	0000000000000000
+SigBlk:	0000000000000000
+SigIgn:	0000000001001000
+SigCgt:	0000000000000002
+CapInh:	0000000000000000
+CapPrm:	0000000000000000
+CapEff:	0000000000000000
+CapBnd:	000001ffffffffff
+CapAmb:	0000000000000000
+NoNewPrivs:	0
+Seccomp:	0
+Seccomp_filters:	0
+Speculation_Store_Bypass:	thread vulnerable
+SpeculationIndirectBranch:	conditional enabled
+Cpus_allowed:	fff
+Cpus_allowed_list:	0-11
+Mems_allowed:	00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000001
+Mems_allowed_list:	0
+voluntary_ctxt_switches:	372
+nonvoluntary_ctxt_switches:	0
+
+
+/proc/2445628/wchan
+do_select
+
+=== 2026-09-18T09:11:48.544+00:00 phase=observing PGID=2445613 PIDS=2445613,2445628 ===
+
+[2026-09-18T09:11:48.544+00:00] $ ps -p 2445613,2445628 -o user,pid,ppid,pgid,etime,stat,pcpu,pmem,rss,vsz,args
+USER         PID    PPID    PGID     ELAPSED STAT %CPU %MEM   RSS    VSZ COMMAND
+kjw      2445613 2445606 2445613       00:26 Ss    0.1  0.0  2048   2904 /mnt/c/Users/jump0/Desktop/Obsidian/RawData/Codyssey/AI????????? ?????????/AI_SW_Basic/??????4_Linux??? OS/??????2_???????????? ????????? ??????????????? ????????? ??? ?????? ?????? ?????????/code/vendor/agent-leak-app-x86
+kjw      2445628 2445613 2445613       00:26 SN    0.8  0.1 17792  24120 /mnt/c/Users/jump0/Desktop/Obsidian/RawData/Codyssey/AI????????? ?????????/AI_SW_Basic/??????4_Linux??? OS/??????2_???????????? ????????? ??????????????? ????????? ??? ?????? ?????? ?????????/code/vendor/agent-leak-app-x86
+[command_exit=0]
+
+[2026-09-18T09:11:48.548+00:00] $ ps -L -p 2445613,2445628 -o pid,tid,stat,pcpu,rss,wchan:32,comm
+    PID     TID STAT %CPU   RSS WCHAN                            COMMAND
+2445613 2445613 Ss    0.1  2048 do_wait                          agent-leak-app-
+2445628 2445628 SN    0.8 17792 do_select                        agent-leak-app-
+[command_exit=0]
+
+[2026-09-18T09:11:48.564+00:00] $ top -b -H -n 1 -p 2445613,2445628
+top - 18:11:48 up 2 days, 12:30,  2 users,  load average: 0.12, 0.27, 0.26
+Threads:   2 total,   0 running,   2 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  1.6 us,  1.6 sy,  0.0 ni, 96.7 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st 
+MiB Mem :  15529.2 total,   2125.1 free,   5101.8 used,   8545.5 buff/cache     
+MiB Swap:   4096.0 total,   4095.2 free,      0.8 used.  10427.4 avail Mem 
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+2445613 kjw       20   0    2904   2048   1920 S   0.0   0.0   0:00.05 agent-l+
+2445628 kjw       30  10   24120  17792   9600 S   0.0   0.1   0:00.23 agent-l+
+[command_exit=0]
+
+[2026-09-18T09:11:48.779+00:00] $ ss -ltnp 'sport = :15034'
+State  Recv-Q Send-Q Local Address:Port  Peer Address:PortProcess
+LISTEN 0      1            0.0.0.0:15034      0.0.0.0:*    users:(("agent-leak-app-",pid=2445628,fd=4))
+[command_exit=0]
+
+/proc/2445613/status
+Name:	agent-leak-app-
+Umask:	0077
+State:	S (sleeping)
+Tgid:	2445613
+Ngid:	0
+Pid:	2445613
+PPid:	2445606
+TracerPid:	0
+Uid:	1000	1000	1000	1000
+Gid:	1000	1000	1000	1000
+FDSize:	64
+Groups:	65534 65534 65534 65534 65534 65534 65534 1000 65534 
+NStgid:	2445613
+NSpid:	2445613
+NSpgid:	2445613
+NSsid:	2445613
+Kthread:	0
+VmPeak:	    2904 kB
+VmSize:	    2904 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	    2048 kB
+VmRSS:	    2048 kB
+RssAnon:	     128 kB
+RssFile:	    1920 kB
+RssShmem:	       0 kB
+VmData:	     248 kB
+VmStk:	     136 kB
+VmExe:	      60 kB
+VmLib:	    1832 kB
+VmPTE:	      44 kB
+VmSwap:	       0 kB
+HugetlbPages:	       0 kB
+CoreDumping:	0
+THP_enabled:	1
+untag_mask:	0xffffffffffffffff
+Threads:	1
+SigQ:	0/62077
+SigPnd:	0000000000000000
+ShdPnd:	0000000000000000
+SigBlk:	0000000000000000
+SigIgn:	0000000000000000
+SigCgt:	fffffffe7ff2feff
+CapInh:	0000000000000000
+CapPrm:	0000000000000000
+CapEff:	0000000000000000
+CapBnd:	000001ffffffffff
+CapAmb:	0000000000000000
+NoNewPrivs:	0
+Seccomp:	0
+Seccomp_filters:	0
+Speculation_Store_Bypass:	thread vulnerable
+SpeculationIndirectBranch:	conditional enabled
+Cpus_allowed:	fff
+Cpus_allowed_list:	0-11
+Mems_allowed:	00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000001
+Mems_allowed_list:	0
+voluntary_ctxt_switches:	867
+nonvoluntary_ctxt_switches:	0
+
+
+/proc/2445613/wchan
+do_wait
+
+/proc/2445628/status
+Name:	agent-leak-app-
+Umask:	0077
+State:	S (sleeping)
+Tgid:	2445628
+Ngid:	0
+Pid:	2445628
+PPid:	2445613
+TracerPid:	0
+Uid:	1000	1000	1000	1000
+Gid:	1000	1000	1000	1000
+FDSize:	64
+Groups:	65534 65534 65534 65534 65534 65534 65534 1000 65534 
+NStgid:	2445628
+NSpid:	2445628
+NSpgid:	2445613
+NSsid:	2445613
+Kthread:	0
+VmPeak:	   24120 kB
+VmSize:	   24120 kB
+VmLck:	       0 kB
+VmPin:	       0 kB
+VmHWM:	   17792 kB
+VmRSS:	   17792 kB
+RssAnon:	    8192 kB
+RssFile:	    9600 kB
+RssShmem:	       0 kB
+VmData:	    9760 kB
+VmStk:	     136 kB
+VmExe:	      60 kB
+VmLib:	    7876 kB
+VmPTE:	      92 kB
+VmSwap:	       0 kB
+HugetlbPages:	       0 kB
+CoreDumping:	0
+THP_enabled:	1
+untag_mask:	0xffffffffffffffff
+Threads:	1
+SigQ:	0/62077
+SigPnd:	0000000000000000
+ShdPnd:	0000000000000000
+SigBlk:	0000000000000000
+SigIgn:	0000000001001000
+SigCgt:	0000000000000002
+CapInh:	0000000000000000
+CapPrm:	0000000000000000
+CapEff:	0000000000000000
+CapBnd:	000001ffffffffff
+CapAmb:	0000000000000000
+NoNewPrivs:	0
+Seccomp:	0
+Seccomp_filters:	0
+Speculation_Store_Bypass:	thread vulnerable
+SpeculationIndirectBranch:	conditional enabled
+Cpus_allowed:	fff
+Cpus_allowed_list:	0-11
+Mems_allowed:	00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000001
+Mems_allowed_list:	0
+voluntary_ctxt_switches:	379
+nonvoluntary_ctxt_switches:	0
+
+
+/proc/2445628/wchan
+do_select
+
+=== 2026-09-18T09:11:49.101+00:00 phase=before_cleanup PGID=2445613 PIDS=2445613 ===
+
+[2026-09-18T09:11:49.101+00:00] $ ps -p 2445613 -o user,pid,ppid,pgid,etime,stat,pcpu,pmem,rss,vsz,args
+USER         PID    PPID    PGID     ELAPSED STAT %CPU %MEM   RSS    VSZ COMMAND
+kjw      2445613 2445606 2445613       00:27 Zs    0.2  0.0     0      0 [agent-leak-app-] <defunct>
+[command_exit=0]
+
+[2026-09-18T09:11:49.109+00:00] $ ps -L -p 2445613 -o pid,tid,stat,pcpu,rss,wchan:32,comm
+    PID     TID STAT %CPU   RSS WCHAN                            COMMAND
+2445613 2445613 Zs    0.2     0 -                                agent-leak-app-
+[command_exit=0]
+
+[2026-09-18T09:11:49.126+00:00] $ top -b -H -n 1 -p 2445613
+top - 18:11:49 up 2 days, 12:30,  2 users,  load average: 0.12, 0.27, 0.26
+Threads:   1 total,   0 running,   0 sleeping,   0 stopped,   1 zombie
+%Cpu(s):  3.2 us,  1.6 sy,  0.0 ni, 95.2 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st 
+MiB Mem :  15529.2 total,   2155.6 free,   5085.0 used,   8531.8 buff/cache     
+MiB Swap:   4096.0 total,   4095.2 free,      0.8 used.  10444.2 avail Mem 
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+2445613 kjw       20   0       0      0      0 Z   0.0   0.0   0:00.06 agent-l+
+[command_exit=0]
+
+[2026-09-18T09:11:49.341+00:00] $ ss -ltnp 'sport = :15034'
+State Recv-Q Send-Q Local Address:Port Peer Address:PortProcess
+[command_exit=0]
+
+/proc/2445613/status
+Name:	agent-leak-app-
+State:	Z (zombie)
+Tgid:	2445613
+Ngid:	0
+Pid:	2445613
+PPid:	2445606
+TracerPid:	0
+Uid:	1000	1000	1000	1000
+Gid:	1000	1000	1000	1000
+FDSize:	0
+Groups:	65534 65534 65534 65534 65534 65534 65534 1000 65534 
+NStgid:	2445613
+NSpid:	2445613
+NSpgid:	2445613
+NSsid:	2445613
+Kthread:	0
+Threads:	1
+SigQ:	1/62077
+SigPnd:	0000000000004000
+ShdPnd:	0000000000000000
+SigBlk:	0000000000000000
+SigIgn:	0000000000000000
+SigCgt:	0000000000000000
+CapInh:	0000000000000000
+CapPrm:	0000000000000000
+CapEff:	0000000000000000
+CapBnd:	000001ffffffffff
+CapAmb:	0000000000000000
+NoNewPrivs:	0
+Seccomp:	0
+Seccomp_filters:	0
+Speculation_Store_Bypass:	thread vulnerable
+SpeculationIndirectBranch:	conditional enabled
+Cpus_allowed:	fff
+Cpus_allowed_list:	0-11
+Mems_allowed:	00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000000,00000001
+Mems_allowed_list:	0
+voluntary_ctxt_switches:	872
+nonvoluntary_ctxt_switches:	0
+
+
+/proc/2445613/wchan
+0

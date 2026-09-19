@@ -1,0 +1,7 @@
+{
+  "source_zip": "/home/kjw/LLM_wiki/Codyssey/AI올인원 본과정/AI_SW_Basic/미션4_Linux와 OS/과제2_컴퓨터가 갑자기 느려지거나 멈췄을 때 원인 찾아 고치기/agent-app-leak.zip",
+  "zip_sha256": "249c9c2841718cb29ef2ed680668f328f5ee253354090225347e130a2e456641",
+  "member": "agent-leak-app-x86",
+  "binary_sha256": "7e0a19cfa80ece6b547a5008273661f0d4d71e526e96b51e0d0f341dd1bb3e40",
+  "binary_bytes": 6502016
+}

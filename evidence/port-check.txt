@@ -1,0 +1,21 @@
+2026-09-16 KST: 현재 WSL 호스트에서 실행한 조회 결과.
+샌드박스 안에서는 netlink/socket 접근이 EPERM으로 거부되어,
+허용된 샌드박스 밖 실행으로 아래 결과를 확인했다.
+
+$ ss -ltnp 'sport = :15034'
+State  Recv-Q Send-Q Local Address:Port  Peer Address:PortProcess
+LISTEN 0      1          127.0.0.1:15034      0.0.0.0:*
+
+$ python3 - <<'PY'
+import socket
+try:
+ with socket.socket() as s: s.bind(('0.0.0.0',15034))
+ print('bind 15034: available')
+except OSError as e:
+ print('bind 15034:',type(e).__name__,e)
+PY
+bind 15034: OSError [Errno 98] Address already in use
+
+판정: 현재 호스트에서 과제 앱에 필요한 0.0.0.0:15034 바인딩 불가.
+이 출력에는 점유 프로세스 정보가 없으므로 소유자를 단정하지 않았다.
+기존 서비스를 종료하거나 포트·방화벽 설정을 변경하지 않았다.

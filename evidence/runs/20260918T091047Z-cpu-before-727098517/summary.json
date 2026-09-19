@@ -1,0 +1,20 @@
+{
+  "2445059:21774830": {
+    "pid": 2445059,
+    "samples": 67,
+    "first_rss_mib": 1.875,
+    "last_rss_mib": 2.0,
+    "max_rss_mib": 2.0,
+    "max_cpu_percent": 9.96,
+    "last_cpu_percent": 0.0
+  },
+  "2445074:21774850": {
+    "pid": 2445074,
+    "samples": 66,
+    "first_rss_mib": 17.375,
+    "last_rss_mib": 17.5,
+    "max_rss_mib": 17.5,
+    "max_cpu_percent": 9.95,
+    "last_cpu_percent": 0.0
+  }
+}

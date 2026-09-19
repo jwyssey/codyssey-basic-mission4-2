@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+runtime/
+vendor/*
+!vendor/README.md
+evidence/tests-tmp/

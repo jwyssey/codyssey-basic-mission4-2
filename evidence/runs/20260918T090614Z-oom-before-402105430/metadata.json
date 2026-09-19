@@ -1,0 +1,24 @@
+{
+  "case": "oom-before",
+  "started_at": "2026-09-18T09:06:14.424+00:00",
+  "uid": 1000,
+  "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "logical_cpus": 12,
+  "app_path": "/mnt/c/Users/jump0/Desktop/Obsidian/RawData/Codyssey/AI올인원 본과정/AI_SW_Basic/미션4_Linux와 OS/과제2_컴퓨터가 갑자기 느려지거나 멈췄을 때 원인 찾아 고치기/code/vendor/agent-leak-app-x86",
+  "app_sha256": "7e0a19cfa80ece6b547a5008273661f0d4d71e526e96b51e0d0f341dd1bb3e40",
+  "environment": {
+    "AGENT_HOME": "/mnt/c/Users/jump0/Desktop/Obsidian/RawData/Codyssey/AI올인원 본과정/AI_SW_Basic/미션4_Linux와 OS/과제2_컴퓨터가 갑자기 느려지거나 멈췄을 때 원인 찾아 고치기/code/evidence/runs/20260918T090614Z-oom-before-402105430/agent-home",
+    "AGENT_PORT": "15034",
+    "AGENT_UPLOAD_DIR": "/mnt/c/Users/jump0/Desktop/Obsidian/RawData/Codyssey/AI올인원 본과정/AI_SW_Basic/미션4_Linux와 OS/과제2_컴퓨터가 갑자기 느려지거나 멈췄을 때 원인 찾아 고치기/code/evidence/runs/20260918T090614Z-oom-before-402105430/agent-home/upload_files",
+    "AGENT_KEY_PATH": "/mnt/c/Users/jump0/Desktop/Obsidian/RawData/Codyssey/AI올인원 본과정/AI_SW_Basic/미션4_Linux와 OS/과제2_컴퓨터가 갑자기 느려지거나 멈췄을 때 원인 찾아 고치기/code/evidence/runs/20260918T090614Z-oom-before-402105430/agent-home/api_keys",
+    "AGENT_LOG_DIR": "/mnt/c/Users/jump0/Desktop/Obsidian/RawData/Codyssey/AI올인원 본과정/AI_SW_Basic/미션4_Linux와 OS/과제2_컴퓨터가 갑자기 느려지거나 멈췄을 때 원인 찾아 고치기/code/evidence/runs/20260918T090614Z-oom-before-402105430/app-logs",
+    "MEMORY_LIMIT": "64",
+    "CPU_MAX_OCCUPY": "100",
+    "MULTI_THREAD_ENABLE": "false"
+  },
+  "duration_limit_s": 90.0,
+  "interval_s": 0.5,
+  "snapshot_interval_s": 5.0,
+  "evidence_source": "provided_app",
+  "launcher_pid": 2440456
+}

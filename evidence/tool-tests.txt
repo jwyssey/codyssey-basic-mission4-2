@@ -1,0 +1,16 @@
+test_no_nonfinite_or_nonpositive_durations (__main__.ConfigurationTests.test_no_nonfinite_or_nonpositive_durations) ... ok
+test_pid_reuse_starts_new_cpu_window (__main__.ConfigurationTests.test_pid_reuse_starts_new_cpu_window) ... ok
+test_preflight_rejects_root_missing_app_and_busy_port (__main__.ConfigurationTests.test_preflight_rejects_root_missing_app_and_busy_port) ... ok
+test_ranges_and_boolean (__main__.ConfigurationTests.test_ranges_and_boolean) ... ok
+test_self_stat_matches_os (__main__.ConfigurationTests.test_self_stat_matches_os) ... ok
+test_child_monitored_and_cleaned_after_parent_exits (__main__.RuntimeTests.test_child_monitored_and_cleaned_after_parent_exits) ... ok
+test_interruption_preserves_result_and_cleans_processes (__main__.RuntimeTests.test_interruption_preserves_result_and_cleans_processes) ... ok
+test_invalid_options_fail_without_launching (__main__.RuntimeTests.test_invalid_options_fail_without_launching) ... ok
+test_monitor_does_not_overwrite_existing_evidence (__main__.RuntimeTests.test_monitor_does_not_overwrite_existing_evidence) ... ok
+test_resource_growth_cpu_and_timeout (__main__.RuntimeTests.test_resource_growth_cpu_and_timeout) ... ok
+test_self_signal_not_runner_timeout (__main__.RuntimeTests.test_self_signal_not_runner_timeout) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 5.751s
+
+OK

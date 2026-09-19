@@ -1,0 +1,30 @@
+{
+  "date": "2026-09-18",
+  "timezone": {
+    "app_log": "Asia/Seoul (UTC+09:00)",
+    "monitor_log": "UTC"
+  },
+  "environment": "WSL2 Linux x86_64; UID 1000; unshare --user --map-current-user --net; 12 logical CPUs",
+  "runs": {
+    "oom-before": "evidence/runs/20260918T090614Z-oom-before-402105430",
+    "oom-after": "evidence/runs/20260918T090643Z-oom-after-033262350",
+    "cpu-before": "evidence/runs/20260918T091121Z-cpu-before-748323350",
+    "cpu-after": "evidence/runs/20260918T091250Z-cpu-after-355471748",
+    "deadlock-before": "evidence/runs/20260918T091433Z-deadlock-before-531338111",
+    "deadlock-after": "evidence/runs/20260918T091713Z-deadlock-after-166295630"
+  },
+  "exploratory_runs": [
+    "evidence/runs/20260918T090717Z-cpu-before-167810366",
+    "evidence/runs/20260918T090847Z-cpu-before-960210215",
+    "evidence/runs/20260918T091047Z-cpu-before-727098517"
+  ],
+  "commands": {
+    "oom-before": "unshare --user --map-current-user --net bash scripts/run-case.sh --app vendor/agent-leak-app-x86 --case oom-before --duration 90 --interval 0.5 --snapshot-interval 5",
+    "oom-after": "unshare --user --map-current-user --net bash scripts/run-case.sh --app vendor/agent-leak-app-x86 --case oom-after --duration 90 --interval 0.5 --snapshot-interval 5",
+    "cpu-before": "unshare --user --map-current-user --net bash scripts/run-case.sh --app vendor/agent-leak-app-x86 --case cpu-before --duration 90 --interval 0.1 --snapshot-interval 5",
+    "cpu-after": "unshare --user --map-current-user --net bash scripts/run-case.sh --app vendor/agent-leak-app-x86 --case cpu-after --duration 90 --interval 0.1 --snapshot-interval 5",
+    "deadlock-before": "unshare --user --map-current-user --net bash scripts/run-case.sh --app vendor/agent-leak-app-x86 --case deadlock-before --duration 90 --interval 0.5 --snapshot-interval 5",
+    "deadlock-after": "unshare --user --map-current-user --net bash scripts/run-case.sh --app vendor/agent-leak-app-x86 --case deadlock-after --duration 90 --interval 0.5 --snapshot-interval 5"
+  },
+  "capture_notes": "OOM 비교 쌍은 최초 파이프 수집본이며 MemoryGuard의 stderr 로그를 보존했다. CPU/Deadlock 최종 비교는 PTY 수집으로 마지막 stdout 문구까지 보존했다. 모든 실행은 원본 바이너리를 사용했다."
+}

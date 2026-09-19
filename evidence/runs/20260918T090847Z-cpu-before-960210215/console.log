@@ -1,0 +1,39 @@
+>>> Starting Agent Boot Sequence...
+[1/6] Checking User Account               [OK]
+   ... Running as service user 'kjw' (uid=1000)
+[2/6] Verifying Environment Variables     [OK]
+   ... All required Envs correct
+[3/6] Checking Required Files             [OK]
+   ... Verified 'secret.key' with correct key string.
+[4/6] Checking Port Availability          [OK]
+   ... Port 15034 is available.
+[5/6] Verifying Log Permission            [OK]
+   ... Log directory is writable: /mnt/c/Users/jump0/Desktop/Obsidian/RawData/Codyssey/AI올인원 본과정/AI_SW_Basic/미션4_Linux와 OS/과제2_컴퓨터가 갑자기 느려지거나 멈췄을 때 원인 찾아 고치기/code/evidence/runs/20260918T090847Z-cpu-before-960210215/app-logs
+[6/6] Verifying Mission Environment       [OK]
+   ... MEMORY_LIMIT=512MB, CPU_MAX_OCCUPY=100%, MULTI_THREAD_ENABLE=False
+------------------------------------------------------------
+All Boot Checks Passed!
+Agent READY
+2026-09-18 18:08:48,293 [INFO] [SafetyGuard] Process priority lowered (nice=10).
+2026-09-18 18:08:48,294 [INFO] Agent listening at port 15034
+
+==================================================
+ [ Agent Initiate ] Resource Check 
+==================================================
+ [ MEMORY ] Limit: 512MB 		[ OK ]
+ [ CPU    ] Limit: 100%  		[ WARNING: Recommend Under 50% ]
+ [ THREAD ] Concurrency: False 		[ OK ]
+--------------------------------------------------
+ >>> SYSTEM STATUS: STABLE. STARTING WORKLOAD MONITORING...
+==================================================
+
+2026-09-18 18:08:50,304 [INFO] [CpuWorker] Started. Maximum CPU Limit: 100%
+2026-09-18 18:08:50,305 [INFO] [CpuWorker] Current Load: 5.00%
+2026-09-18 18:08:53,413 [INFO] [CpuWorker] Current Load: 14.59%
+2026-09-18 18:08:56,529 [INFO] [CpuWorker] Current Load: 22.52%
+2026-09-18 18:08:59,645 [INFO] [CpuWorker] Current Load: 28.63%
+2026-09-18 18:09:02,761 [INFO] [CpuWorker] Current Load: 38.00%
+2026-09-18 18:09:05,877 [INFO] [CpuWorker] Current Load: 43.57%
+2026-09-18 18:09:08,985 [INFO] [CpuWorker] Current Load: 45.33%
+2026-09-18 18:09:12,101 [INFO] [CpuWorker] Current Load: 53.20%
+2026-09-18 18:09:12,203 [CRITICAL] [CpuWorker] CPU Threshold Violated! (53.199999999999996%).

@@ -1,0 +1,51 @@
+[PASS] 원본 바이너리 SHA256 일치
+[PASS] oom-before: 일반 계정·제공 원본
+[PASS] oom-before: 확정 비교 설정
+[PASS] oom-before: 부팅 완료
+[PASS] oom-before: 관제 오류 없음
+[PASS] oom-before: 워커 PID·시계열·스레드 증거
+[PASS] oom-before: 시스템 도구 접근 성공
+[PASS] oom-after: 일반 계정·제공 원본
+[PASS] oom-after: 확정 비교 설정
+[PASS] oom-after: 부팅 완료
+[PASS] oom-after: 관제 오류 없음
+[PASS] oom-after: 워커 PID·시계열·스레드 증거
+[PASS] oom-after: 시스템 도구 접근 성공
+[PASS] cpu-before: 일반 계정·제공 원본
+[PASS] cpu-before: 확정 비교 설정
+[PASS] cpu-before: 부팅 완료
+[PASS] cpu-before: 관제 오류 없음
+[PASS] cpu-before: 워커 PID·시계열·스레드 증거
+[PASS] cpu-before: 시스템 도구 접근 성공
+[PASS] cpu-after: 일반 계정·제공 원본
+[PASS] cpu-after: 확정 비교 설정
+[PASS] cpu-after: 부팅 완료
+[PASS] cpu-after: 관제 오류 없음
+[PASS] cpu-after: 워커 PID·시계열·스레드 증거
+[PASS] cpu-after: 시스템 도구 접근 성공
+[PASS] deadlock-before: 일반 계정·제공 원본
+[PASS] deadlock-before: 확정 비교 설정
+[PASS] deadlock-before: 부팅 완료
+[PASS] deadlock-before: 관제 오류 없음
+[PASS] deadlock-before: 워커 PID·시계열·스레드 증거
+[PASS] deadlock-before: 시스템 도구 접근 성공
+[PASS] deadlock-after: 일반 계정·제공 원본
+[PASS] deadlock-after: 확정 비교 설정
+[PASS] deadlock-after: 부팅 완료
+[PASS] deadlock-after: 관제 오류 없음
+[PASS] deadlock-after: 워커 PID·시계열·스레드 증거
+[PASS] deadlock-after: 시스템 도구 접근 성공
+[PASS] oom: 단일 변수·동일 관찰 설정
+[PASS] cpu: 단일 변수·동일 관찰 설정
+[PASS] deadlock: 단일 변수·동일 관찰 설정
+[PASS] oom-before: RSS 증가와 앱 MemoryGuard 종료
+[PASS] oom-after: RSS 증가와 앱 MemoryGuard 종료
+[PASS] OOM 한도 상향 후 생존 연장
+[PASS] CPU 상승과 앱 Watchdog 종료
+[PASS] Deadlock 양방향 락 보유·대기 로그
+[PASS] Deadlock PID 생존·자원 및 로그 정체 79.317초
+[PASS] cpu-after: 90초 생존 뒤 수집기가 정리
+[PASS] cpu-after: 실제 작업·로그 진행, 캐시 회수
+[PASS] deadlock-after: 90초 생존 뒤 수집기가 정리
+[PASS] deadlock-after: 실제 작업·로그 진행, 캐시 회수
+Checks: 50, Failed checks: 0

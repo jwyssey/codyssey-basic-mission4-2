@@ -1,0 +1,10 @@
+{
+  "ended_at": "2026-09-18T09:07:00.873+00:00",
+  "reason": "app_exited",
+  "observed_s": 17.536,
+  "alive_before_cleanup": false,
+  "launcher_returncode": -9,
+  "monitor_returncode": 0,
+  "runner_events": [],
+  "error": null
+}

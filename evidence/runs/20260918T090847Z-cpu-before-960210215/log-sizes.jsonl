@@ -1,0 +1,6 @@
+{"timestamp": "2026-09-18T09:08:48.282+00:00", "phase": "observing", "bytes": {"console.log": 0}}
+{"timestamp": "2026-09-18T09:08:53.632+00:00", "phase": "observing", "bytes": {"console.log": 1729, "app-logs/agent_app.log": 345}}
+{"timestamp": "2026-09-18T09:08:58.984+00:00", "phase": "observing", "bytes": {"console.log": 1793, "app-logs/agent_app.log": 409}}
+{"timestamp": "2026-09-18T09:09:04.335+00:00", "phase": "observing", "bytes": {"console.log": 1921, "app-logs/agent_app.log": 537}}
+{"timestamp": "2026-09-18T09:09:09.683+00:00", "phase": "observing", "bytes": {"console.log": 2049, "app-logs/agent_app.log": 665}}
+{"timestamp": "2026-09-18T09:09:12.480+00:00", "phase": "before_cleanup", "bytes": {"console.log": 2207, "app-logs/agent_app.log": 823}}
