@@ -2,6 +2,8 @@
 
 AI/SW Basic · 미션 4 Linux와 OS · 과제 2
 
+평가표의 질문별 답변과 쉬운 설명은 [Evaluation.md](Evaluation.md)에 정리했다. 실제 실습 순서는 [TUTORIAL.md](TUTORIAL.md), 전체 실측 보고서는 아래 내용을 따른다.
+
 ## Docker로 실습 시작하기
 
 Windows·macOS·Linux에서 따라 할 수 있는 [단계별 튜토리얼](TUTORIAL.md)을 먼저 읽는다. 교육기관 제공 원본 ZIP은 [vendor/agent-app-leak.zip](vendor/agent-app-leak.zip)에 포함되어 있어 저장소를 clone하면 함께 받는다. Docker Desktop 또는 Docker Engine + Compose를 준비하고 저장소 루트에서 실행한다.
