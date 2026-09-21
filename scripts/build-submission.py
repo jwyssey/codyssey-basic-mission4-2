@@ -87,7 +87,7 @@ def main():
     document.set_metadata({"title": "Linux 장애 분석 과제 2 - OOM, CPU, Deadlock", "author": "과제 실습 보고서"})
     # 원문 증거와 수집 코드를 보존하되 제공 바이너리·키·캐시는 제외한다.
     files = set()
-    for folder in ("bin", "lib", "scripts", "tests", "reports", "templates", "docs", "docker", "rawdata"):
+    for folder in ("bin", "lib", "scripts", "tests", "reports", "templates", "docs", "docker"):
         files.update(p for p in (ROOT / folder).rglob("*") if p.is_file() and "__pycache__" not in p.parts)
     for name in ("README.md", "TUTORIAL.md", "Evaluation.md", "Dockerfile", "compose.yaml", ".dockerignore", ".gitattributes", ".gitignore"):
         files.add(ROOT / name)

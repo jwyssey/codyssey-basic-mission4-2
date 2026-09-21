@@ -450,7 +450,7 @@ Linux 일반 계정, Python 3.9 이상, Bash, `ps`, `top`, `ss`, `unshare`가 �
 | [evidence/comparison.json](evidence/comparison.json) | 원문 CSV에서 계산한 워커별 통계 |
 | [docs/EXPERIMENTS.md](docs/EXPERIMENTS.md) | 실행 방법·지표·종료 결과 해석 |
 | [docs/VERIFICATION.md](docs/VERIFICATION.md) | 검증 범위와 한계 |
-| [rawdata/evaluation-criteria.webp](rawdata/evaluation-criteria.webp) | 사용자 제공 평가문항 원본 이미지 |
+| [Evaluation.md](Evaluation.md) | 평가문항별 답변·쉬운 설명·실측 근거 |
 
 실험마다 `AGENT_HOME/upload_files`, `api_keys/secret.key`, 로그 폴더를 만들고 명세의 테스트 키 `agent_api_key_test`와 필수 환경변수를 구성한다. 환경변수는 해당 프로세스에만 적용된다.
 
@@ -483,15 +483,6 @@ python3 scripts/summarize-evidence.py
 ## 평가문항 대응
 
 2026-09-20 제공받은 평가문항에 맞춰 아래와 같이 대조했다. 기존 장애 보고서에는 현상·전후 비교·로그 증거가 있으며, 수집 원리와 운영 적용 질문의 답변을 이 README에 추가했다. 운영 개선 부분은 설계 제안이며 구현·실측한 기능과 구분한다. 표는 문항별 설명 위치를 안내하며 실제 PASS/FAIL과 보너스 크레딧은 평가자가 판단한다.
-
-<details>
-<summary>평가문항 원본 이미지 펼치기</summary>
-
-![미션 4-2 평가문항 원본: 실측 증거, 도구 설명, 장애 원리, 운영 적용, 보너스](rawdata/evaluation-criteria.webp)
-
-원본 파일과 SHA256은 [rawdata 안내](rawdata/README.md)에 기록했다.
-
-</details>
 
 | 문항 | 평가 내용 | README의 설명·증거 위치 |
 | --- | --- | --- |
