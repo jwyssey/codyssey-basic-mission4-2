@@ -89,7 +89,7 @@ def main():
     files = set()
     for folder in ("bin", "lib", "scripts", "tests", "reports", "templates", "docs", "docker"):
         files.update(p for p in (ROOT / folder).rglob("*") if p.is_file() and "__pycache__" not in p.parts)
-    for name in ("README.md", "TUTORIAL.md", "Evaluation.md", "Dockerfile", "compose.yaml", ".dockerignore", ".gitattributes", ".gitignore"):
+    for name in ("README.md", "TUTORIAL.md", "EVALUATION.md", "Dockerfile", "compose.yaml", ".dockerignore", ".gitattributes", ".gitignore"):
         files.add(ROOT / name)
     files.add(ROOT / "vendor/README.md")
     files.update(p for p in (ROOT / "evidence").glob("*") if p.is_file())

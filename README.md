@@ -2,7 +2,7 @@
 
 AI/SW Basic · 미션 4 Linux와 OS · 과제 2
 
-평가표의 질문별 답변과 쉬운 설명은 [Evaluation.md](Evaluation.md)에 정리했다. 실제 실습 순서는 [TUTORIAL.md](TUTORIAL.md), 전체 실측 보고서는 아래 내용을 따른다.
+평가표의 질문별 답변과 쉬운 설명은 [EVALUATION.md](EVALUATION.md)에 정리했다. 실제 실습 순서는 [TUTORIAL.md](TUTORIAL.md), 전체 실측 보고서는 아래 내용을 따른다.
 
 ## Docker로 실습 시작하기
 
@@ -450,7 +450,7 @@ Linux 일반 계정, Python 3.9 이상, Bash, `ps`, `top`, `ss`, `unshare`가 �
 | [evidence/comparison.json](evidence/comparison.json) | 원문 CSV에서 계산한 워커별 통계 |
 | [docs/EXPERIMENTS.md](docs/EXPERIMENTS.md) | 실행 방법·지표·종료 결과 해석 |
 | [docs/VERIFICATION.md](docs/VERIFICATION.md) | 검증 범위와 한계 |
-| [Evaluation.md](Evaluation.md) | 평가문항별 답변·쉬운 설명·실측 근거 |
+| [EVALUATION.md](EVALUATION.md) | 평가문항별 답변·쉬운 설명·실측 근거 |
 
 실험마다 `AGENT_HOME/upload_files`, `api_keys/secret.key`, 로그 폴더를 만들고 명세의 테스트 키 `agent_api_key_test`와 필수 환경변수를 구성한다. 환경변수는 해당 프로세스에만 적용된다.
 
