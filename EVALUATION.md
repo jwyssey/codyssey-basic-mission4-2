@@ -28,7 +28,7 @@
 2026-09-18 18:06:22,868 [CRITICAL] [MemoryGuard] Self-terminating process 2440463 to prevent system instability.
 ```
 
-같은 워커(PID 2440463)의 RSS도 **17.250 → 67.250MiB**로 증가했다. `result.json`에는 `reason=app_exited`, `launcher_returncode=-9`(SIGKILL), `runner_events=[]`가 남았다. 앱의 자체 종료 로그와 수집기의 신호 기록을 함께 보면 **앱 MemoryGuard의 보호 종료**로 판단할 수 있다. Linux 커널의 OOM Kill을 확인한 결과는 아니다. 마지막 RSS 샘플은 75MB 할당 직전에 찍혔으므로 종료 직전의 최대값은 아니다.
+같은 워커(PID 2440463)의 RSS도 **17.250 → 67.250MiB**로 증가했다. 앱의 자체 종료 로그와 수집기의 신호 기록을 함께 보면 **앱 MemoryGuard의 보호 종료**로 판단할 수 있다. Linux 커널의 OOM Kill을 확인한 결과는 아니다.
 
 Heap은 앱이 보고한 할당량이고 RSS는 OS가 실제 메모리에 올라와 있다고 본 양이다. 따라서 두 수치가 정확히 같을 필요는 없다. 여기서는 **서로 다른 측정값이 같은 증가 방향을 보인다**는 점이 중요하다.
 
@@ -80,7 +80,7 @@ After에서도 Heap이 150MB에 이르자 `150MB >= 128MB` 보호 로그를 남�
 >>> [SYSTEM] WATCHDOG: INITIATING EMERGENCY ABORT (SIGTERM) <<<
 ```
 
-워커 PID 2445628의 OS 측정 CPU는 종료 직전 약 0.1초 구간에서 **58.26%**였다. 두 수치는 계산 방식이 다르므로 같은 임계값으로 비교하지 않는다. `result.json`에는 `reason=app_exited`, `launcher_returncode=-15`, `runner_events=[]`가 남아 있어 수집기가 보낸 종료 신호는 없었다. 앱의 정확한 내부 임계값이나 계산식까지 확인한 것은 아니다.
+워커 PID 2445628의 OS 측정 CPU는 종료 직전 약 0.1초 구간에서 **58.26%**였다. 두 수치는 계산 방식이 다르므로 같은 임계값으로 비교하지 않는다. 수집기가 보낸 종료 신호는 없었으나, 앱의 정확한 내부 임계값이나 계산식까지 확인한 것은 아니다.
 
 `CPU_MAX_OCCUPY=100`이라는 설정만 보고 CPU가 정확히 100%일 때 종료한다고 해석할 수 없다. 실제로 확인한 것은 **앱이 52.69%에서 정책 위반을 선언하고 종료했다**는 사실이다.
 
@@ -137,7 +137,7 @@ After의 `result.json`에는 `reason=observation_timeout`, `alive_before_cleanup
 | 워커 상태 | 동일 PID·시작 틱 유지, `alive_before_cleanup=true` |
 | 스레드 대기 | `ps -L`에서 워커 스레드들이 `futex_wait_queue` 대기 |
 
-정상적으로 다음 입력을 기다리는 앱도 CPU가 0%이고 로그가 멈출 수 있다. 그래서 **살아 있음과 작업 진행은 별도로 확인**했다. 포트가 열린 상태 역시 요청이 실제로 처리되고 있다는 증거는 아니다. 아래 3-4의 **서로 상대 락을 기다리는 로그**까지 합쳐 교착으로 판단했다. [관측 스냅샷](evidence/runs/20260918T091433Z-deadlock-before-531338111/snapshots.txt) · [로그 크기 기록](evidence/runs/20260918T091433Z-deadlock-before-531338111/log-sizes.jsonl)
+정상적으로 다음 입력을 기다리는 앱도 CPU가 0%이고 로그가 멈출 수 있다. 그래서 **살아 있음과 작업 진행은 별도로 확인**했다. 아래 3-4의 **서로 상대 락을 기다리는 로그**까지 합쳐 교착으로 판단했다. [관측 스냅샷](evidence/runs/20260918T091433Z-deadlock-before-531338111/snapshots.txt) · [로그 크기 기록](evidence/runs/20260918T091433Z-deadlock-before-531338111/log-sizes.jsonl)
 
 ### 1-6. [Deadlock] 환경변수( `MULTI_THREAD_ENABLE` ) 조정 후 데드락 재현/회피 비교 결과가 있는가?
 
@@ -145,7 +145,7 @@ After의 `result.json`에는 `reason=observation_timeout`, `alive_before_cleanup
 
 두 실행은 `MEMORY_LIMIT=512`, `CPU_MAX_OCCUPY=40`, 관찰 상한 90초, 수집 간격 0.5초를 같게 했다. 둘 다 관찰 종료 때 살아 있었지만, **락 대기 시점 이후의 작업 진행은 After에서만 확인**됐다. `false`는 문제의 동시 처리 경로를 피한 설정이며, 이미 걸린 락을 풀거나 락 설계를 고친 결과는 아니다.
 
-After 로그에는 18:17:16의 `All tasks completed` 이후에도 메모리 회수와 새 Heap 기록이 이어진다. 이처럼 **완료 뒤에도 새 활동이 보인다는 점**이 단순한 PID 생존보다 강한 회피 근거다. `false`를 앱 전체가 단일 스레드로만 실행됐다는 뜻으로 해석하지 않는다.
+After 로그에는 18:17:16의 `All tasks completed` 이후에도 메모리 회수와 새 Heap 기록이 이어진다. 
 
 After의 긴 로그에서 작업 완료와 메모리 회수 전후의 행을 발췌했다. 회수 뒤에도 Heap 로그가 다시 쌓여 작업이 이어졌음을 볼 수 있다.
 
