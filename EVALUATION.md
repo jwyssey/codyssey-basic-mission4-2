@@ -16,14 +16,14 @@
 
 ### 1-1. OOM의 메모리 증가와 강제 종료가 기록되어 있는가?
 
-**그렇다.** `MEMORY_LIMIT=64` 실행에서 앱 Heap은 약 3초마다 25MB씩 늘었고, 75MB가 되자 MemoryGuard가 종료를 알렸다. 아래는 시각과 핵심 메시지만 추린 로그다.
+**그렇다.** `MEMORY_LIMIT=64` 실행에서 앱 Heap은 약 3초마다 25MB씩 늘었고, 75MB가 되자 MemoryGuard가 종료를 알렸다. 아래는 실제 앱 로그의 연속된 구간이다.
 
 ```text
-18:06:16 [MemoryWorker] Current Heap: 25MB
-18:06:19 [MemoryWorker] Current Heap: 50MB
-18:06:22 [MemoryWorker] Current Heap: 75MB
-18:06:22 [MemoryGuard] Memory limit exceeded (75MB >= 64MB)
-18:06:22 [MemoryGuard] Self-terminating process 2440463
+2026-09-18 18:06:16,803 [INFO] [MemoryWorker] Current Heap: 25MB
+2026-09-18 18:06:19,834 [INFO] [MemoryWorker] Current Heap: 50MB
+2026-09-18 18:06:22,866 [INFO] [MemoryWorker] Current Heap: 75MB
+2026-09-18 18:06:22,867 [CRITICAL] [MemoryGuard] Memory limit exceeded (75MB >= 64MB) / (Recommend Over 256MB)
+2026-09-18 18:06:22,868 [CRITICAL] [MemoryGuard] Self-terminating process 2440463 to prevent system instability.
 ```
 
 같은 워커(PID 2440463)의 RSS도 **17.250 → 67.250MiB**로 증가했다. `result.json`에는 `reason=app_exited`, `launcher_returncode=-9`(SIGKILL), `runner_events=[]`가 남았다. 앱의 자체 종료 로그와 수집기의 신호 기록을 함께 보면 **앱 MemoryGuard의 보호 종료**로 판단할 수 있다. Linux 커널의 OOM Kill을 확인한 결과는 아니다. 마지막 RSS 샘플은 75MB 할당 직전에 찍혔으므로 종료 직전의 최대값은 아니다.
@@ -43,25 +43,46 @@ Heap은 앱이 보고한 할당량이고 RSS는 OS가 실제 메모리에 올라
 | 관측한 생존 시간 | 8.418초 | 17.536초 |
 | 종료 원인 | MemoryGuard | MemoryGuard |
 
-After에서도 Heap이 150MB에 이르자 `150MB >= 128MB` 보호 로그를 남기고 종료했다. 따라서 한도 상향은 **종료를 늦춘 임시 조치**다. [After 로그](evidence/runs/20260918T090643Z-oom-after-033262350/console.log) · [두 실행 결과](evidence/manifest.json)
+After에서도 Heap이 150MB에 이르자 `150MB >= 128MB` 보호 로그를 남기고 종료했다. 따라서 한도 상향은 **종료를 늦춘 임시 조치**다.
+
+설정 변경 후에도 약 3초마다 25MB씩 증가하는 모습은 그대로다.
+
+```text
+2026-09-18 18:06:45,379 [INFO] [MemoryWorker] Current Heap: 25MB
+2026-09-18 18:06:48,408 [INFO] [MemoryWorker] Current Heap: 50MB
+2026-09-18 18:06:51,441 [INFO] [MemoryWorker] Current Heap: 75MB
+2026-09-18 18:06:54,475 [INFO] [MemoryWorker] Current Heap: 100MB
+2026-09-18 18:06:57,505 [INFO] [MemoryWorker] Current Heap: 125MB
+2026-09-18 18:07:00,533 [INFO] [MemoryWorker] Current Heap: 150MB
+2026-09-18 18:07:00,534 [CRITICAL] [MemoryGuard] Memory limit exceeded (150MB >= 128MB) / (Recommend Over 256MB)
+2026-09-18 18:07:00,535 [CRITICAL] [MemoryGuard] Self-terminating process 2440969 to prevent system instability.
+```
+
+[After 로그](evidence/runs/20260918T090643Z-oom-after-033262350/console.log) · [두 실행 결과](evidence/manifest.json)
 
 ### 1-3. CPU 임계 초과와 종료가 기록되어 있는가?
 
-**그렇다.** 앱의 `Current Load`가 52.69%가 된 직후 임계값 위반과 Watchdog의 SIGTERM이 기록됐다. 아래는 시각과 핵심 메시지만 추린 로그다.
+**그렇다.** 앱의 `Current Load`가 5.00%에서 52.69%로 계속 오른 직후 임계값 위반과 Watchdog의 SIGTERM이 기록됐다. 아래는 실제 앱 로그에서 `CpuWorker`의 연속된 구간이다.
 
 ```text
-18:11:48 [CpuWorker] Current Load: 52.69%
-18:11:49 [CpuWorker] CPU Threshold Violated! (52.69%)
-[SYSTEM] WATCHDOG: INITIATING EMERGENCY ABORT (SIGTERM)
+2026-09-18 18:11:24,056 [INFO] [CpuWorker] Current Load: 5.00%
+2026-09-18 18:11:27,172 [INFO] [CpuWorker] Current Load: 13.56%
+2026-09-18 18:11:30,289 [INFO] [CpuWorker] Current Load: 16.83%
+2026-09-18 18:11:33,406 [INFO] [CpuWorker] Current Load: 21.75%
+2026-09-18 18:11:36,522 [INFO] [CpuWorker] Current Load: 30.94%
+2026-09-18 18:11:39,638 [INFO] [CpuWorker] Current Load: 32.60%
+2026-09-18 18:11:42,755 [INFO] [CpuWorker] Current Load: 41.77%
+2026-09-18 18:11:45,871 [INFO] [CpuWorker] Current Load: 44.69%
+2026-09-18 18:11:48,987 [INFO] [CpuWorker] Current Load: 52.69%
+2026-09-18 18:11:49,088 [CRITICAL] [CpuWorker] CPU Threshold Violated! (52.69%).
+>>> [SYSTEM] WATCHDOG: INITIATING EMERGENCY ABORT (SIGTERM) <<<
 ```
 
 워커 PID 2445628의 OS 측정 CPU는 종료 직전 약 0.1초 구간에서 **58.26%**였다. 두 수치는 계산 방식이 다르므로 같은 임계값으로 비교하지 않는다. `result.json`에는 `reason=app_exited`, `launcher_returncode=-15`, `runner_events=[]`가 남아 있어 수집기가 보낸 종료 신호는 없었다. 앱의 정확한 내부 임계값이나 계산식까지 확인한 것은 아니다.
 
 `CPU_MAX_OCCUPY=100`이라는 설정만 보고 CPU가 정확히 100%일 때 종료한다고 해석할 수 없다. 실제로 확인한 것은 **앱이 52.69%에서 정책 위반을 선언하고 종료했다**는 사실이다.
 
-![CPU 설정 전후 워커의 RSS와 CPU 그래프](evidence/charts/cpu.png)
-
-빨간 선은 27초 무렵 종료되며, 파란 선은 관찰 시간 동안 이어진다. CPU는 0.1초 간격으로 측정한 짧은 구간 값이다. [원문 로그](evidence/runs/20260918T091121Z-cpu-before-748323350/console.log) · [측정 CSV](evidence/runs/20260918T091121Z-cpu-before-748323350/metrics.csv)
+`Current Load` 로그는 약 3초 간격이고, OS의 CPU 측정은 0.1초 간격이다. 위 로그는 앱 내부 부하의 상승을, [측정 CSV](evidence/runs/20260918T091121Z-cpu-before-748323350/metrics.csv)는 워커의 구간 CPU 사용률을 보여 준다. [원문 로그](evidence/runs/20260918T091121Z-cpu-before-748323350/console.log)
 
 ### 1-4. CPU_MAX_OCCUPY 조정 후 종료·생존이 달라졌는가?
 
@@ -73,9 +94,32 @@ After에서도 Heap이 150MB에 이르자 `150MB >= 128MB` 보호 로그를 남�
 | 관찰 결과 | 27.302초 후 앱 종료 | 90초 관찰 때까지 생존 |
 | 종료를 알리는 근거 | Watchdog 위반 로그 | 관찰 상한 후 수집기의 정리 신호 |
 
+After의 앱 로그에서는 부하가 5.00%에서 40.00%까지 오른 뒤 냉각되고, 다시 증가한다. 아래는 `CpuWorker` 행만 시간순으로 뽑은 원문이다.
+
 ```text
-18:13:51 [CpuWorker] Peak reached (40.00%). Starting cooldown...
-18:14:07 [CpuWorker] Cooldown complete (5.00%). Resuming load increase...
+2026-09-18 18:12:53,775 [INFO] [CpuWorker] Current Load: 5.00%
+2026-09-18 18:12:56,891 [INFO] [CpuWorker] Current Load: 14.00%
+2026-09-18 18:13:00,005 [INFO] [CpuWorker] Current Load: 18.17%
+2026-09-18 18:13:03,121 [INFO] [CpuWorker] Current Load: 26.96%
+2026-09-18 18:13:06,237 [INFO] [CpuWorker] Current Load: 33.44%
+2026-09-18 18:13:08,348 [INFO] [CpuWorker] Peak reached (40.00%). Starting cooldown...
+2026-09-18 18:13:09,355 [INFO] [CpuWorker] Current Load: 40.00%
+2026-09-18 18:13:12,471 [INFO] [CpuWorker] Current Load: 38.77%
+2026-09-18 18:13:15,587 [INFO] [CpuWorker] Current Load: 35.26%
+2026-09-18 18:13:18,704 [INFO] [CpuWorker] Current Load: 33.39%
+2026-09-18 18:13:21,813 [INFO] [CpuWorker] Current Load: 27.29%
+2026-09-18 18:13:24,929 [INFO] [CpuWorker] Current Load: 18.17%
+2026-09-18 18:13:28,042 [INFO] [CpuWorker] Current Load: 9.20%
+2026-09-18 18:13:30,153 [INFO] [CpuWorker] Cooldown complete (5.00%). Resuming load increase...
+2026-09-18 18:13:31,159 [INFO] [CpuWorker] Current Load: 5.00%
+2026-09-18 18:13:34,273 [INFO] [CpuWorker] Current Load: 10.17%
+2026-09-18 18:13:37,389 [INFO] [CpuWorker] Current Load: 12.11%
+2026-09-18 18:13:40,506 [INFO] [CpuWorker] Current Load: 12.48%
+2026-09-18 18:13:43,622 [INFO] [CpuWorker] Current Load: 22.00%
+2026-09-18 18:13:46,733 [INFO] [CpuWorker] Current Load: 26.98%
+2026-09-18 18:13:49,845 [INFO] [CpuWorker] Current Load: 34.93%
+2026-09-18 18:13:51,956 [INFO] [CpuWorker] Peak reached (40.00%). Starting cooldown...
+2026-09-18 18:13:52,963 [INFO] [CpuWorker] Current Load: 40.00%
 ```
 
 After의 `result.json`에는 `reason=observation_timeout`, `alive_before_cleanup=true`, 수집기가 보낸 `SIGTERM`이 기록됐다. 따라서 After의 최종 종료 코드 `-15`는 장애 재발이 아니라 **90초 관찰을 마친 뒤 정리한 결과**다. [After 로그](evidence/runs/20260918T091250Z-cpu-after-355471748/console.log) · [종료 결과](evidence/runs/20260918T091250Z-cpu-after-355471748/result.json)
@@ -101,9 +145,20 @@ After의 `result.json`에는 `reason=observation_timeout`, `alive_before_cleanup
 
 After 로그에는 18:17:16의 `All tasks completed` 이후에도 메모리 회수와 새 Heap 기록이 이어진다. 이처럼 **완료 뒤에도 새 활동이 보인다는 점**이 단순한 PID 생존보다 강한 회피 근거다. `false`를 앱 전체가 단일 스레드로만 실행됐다는 뜻으로 해석하지 않는다.
 
-![교착상태 설정 전후 워커의 RSS와 CPU 그래프](evidence/charts/deadlock.png)
+After의 긴 로그에서 작업 완료와 메모리 회수 전후의 행을 발췌했다. 회수 뒤에도 Heap 로그가 다시 쌓여 작업이 이어졌음을 볼 수 있다.
 
-빨간 선의 정체와 파란 선의 메모리 변화·CPU 활동을 비교할 수 있다. 그래프만으로 락 관계를 알 수 없으므로 앱 로그도 함께 확인한다. [Before 락 로그](evidence/runs/20260918T091433Z-deadlock-before-531338111/console.log) · [After 진행 로그](evidence/runs/20260918T091713Z-deadlock-after-166295630/console.log)
+```text
+2026-09-18 18:17:16,593 [INFO] [Scheduler] All tasks completed.
+2026-09-18 18:18:14,098 [INFO] [MemoryWorker] Current Heap: 500MB
+2026-09-18 18:18:17,131 [INFO] [MemoryWorker] Current Heap: 525MB
+2026-09-18 18:18:17,146 [INFO] [System] Memory Cache Flushed. Process Stabilized.
+2026-09-18 18:18:22,173 [INFO] [MemoryWorker] Current Heap: 25MB
+2026-09-18 18:18:25,204 [INFO] [MemoryWorker] Current Heap: 50MB
+2026-09-18 18:18:28,228 [INFO] [MemoryWorker] Current Heap: 75MB
+2026-09-18 18:18:31,259 [INFO] [MemoryWorker] Current Heap: 100MB
+```
+
+[Before 락 로그](evidence/runs/20260918T091433Z-deadlock-before-531338111/console.log) · [After 진행 로그](evidence/runs/20260918T091713Z-deadlock-after-166295630/console.log)
 
 ### 1-7. 세 보고서가 GitHub Issue 구조를 갖췄는가?
 
