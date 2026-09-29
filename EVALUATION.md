@@ -43,7 +43,7 @@ Heap은 앱이 보고한 할당량이고 RSS는 OS가 실제 메모리에 올라
 | 관측한 생존 시간 | 8.418초 | 17.536초 |
 | 종료 원인 | MemoryGuard | MemoryGuard |
 
-After에서도 Heap이 150MB에 이르자 `150MB >= 128MB` 보호 로그를 남기고 종료했다. 따라서 한도 상향은 **종료를 늦춘 임시 조치**다. 이 비교는 각 조건 한 번의 측정이므로 일반적인 개선 배수를 뜻하지 않는다. [After 로그](evidence/runs/20260918T090643Z-oom-after-033262350/console.log) · [두 실행 결과](evidence/manifest.json)
+After에서도 Heap이 150MB에 이르자 `150MB >= 128MB` 보호 로그를 남기고 종료했다. 따라서 한도 상향은 **종료를 늦춘 임시 조치**다. [After 로그](evidence/runs/20260918T090643Z-oom-after-033262350/console.log) · [두 실행 결과](evidence/manifest.json)
 
 ### 1-3. CPU 임계 초과와 종료가 기록되어 있는가?
 
@@ -78,7 +78,7 @@ After에서도 Heap이 150MB에 이르자 `150MB >= 128MB` 보호 로그를 남�
 18:14:07 [CpuWorker] Cooldown complete (5.00%). Resuming load increase...
 ```
 
-After의 `result.json`에는 `reason=observation_timeout`, `alive_before_cleanup=true`, 수집기가 보낸 `SIGTERM`이 기록됐다. 따라서 After의 최종 종료 코드 `-15`는 장애 재발이 아니라 **90초 관찰을 마친 뒤 정리한 결과**다. 앱의 작업 시나리오도 설정에 따라 달라지므로 동일 작업의 속도나 실제 요청 지연이 개선됐다고 단정하지 않는다. [After 로그](evidence/runs/20260918T091250Z-cpu-after-355471748/console.log) · [종료 결과](evidence/runs/20260918T091250Z-cpu-after-355471748/result.json)
+After의 `result.json`에는 `reason=observation_timeout`, `alive_before_cleanup=true`, 수집기가 보낸 `SIGTERM`이 기록됐다. 따라서 After의 최종 종료 코드 `-15`는 장애 재발이 아니라 **90초 관찰을 마친 뒤 정리한 결과**다. [After 로그](evidence/runs/20260918T091250Z-cpu-after-355471748/console.log) · [종료 결과](evidence/runs/20260918T091250Z-cpu-after-355471748/result.json)
 
 ### 1-5. 살아 있지만 로그와 자원이 정체된 상태를 식별했는가?
 
