@@ -30,9 +30,7 @@
 
 Heap은 앱이 보고한 할당량이고 RSS는 OS가 실제 메모리에 올라와 있다고 본 양이다. 따라서 두 수치가 정확히 같을 필요는 없다. 여기서는 **서로 다른 측정값이 같은 증가 방향을 보인다**는 점이 중요하다.
 
-![OOM 설정 전후 워커의 RSS와 CPU 그래프](evidence/charts/oom.png)
-
-그래프의 가로축은 모니터 시작 후 경과 시간이다. 빨간 선은 설정 전, 파란 선은 설정 후이며 점선은 각 실행의 종료 시점이다. 계단 모양은 주기적 할당과 0.5초 수집 간격을 반영한다. [원문 로그](evidence/runs/20260918T090614Z-oom-before-402105430/console.log) · [측정 CSV](evidence/runs/20260918T090614Z-oom-before-402105430/metrics.csv)
+[원문 로그](evidence/runs/20260918T090614Z-oom-before-402105430/console.log) · [측정 CSV](evidence/runs/20260918T090614Z-oom-before-402105430/metrics.csv)
 
 ### 1-2. MEMORY_LIMIT 조정 뒤 생존 시간이 늘었는가?
 
